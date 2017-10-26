@@ -7,16 +7,17 @@ public class Edge {
     private Node to;
     private int bandwidth;
 
-    public Edge(Node from, Node to, int bandwidth) {
-        this.from = Graph.findNode(from);
+    private Graph graph = Graph.getInstance();
+
+    public Edge(String fromId, String toId, int bandwidth) {
+        this.from = graph.findNode(fromId);
         if (this.from == null) {
-            this.from = new Node(from.getId());
+            this.from = new Node(fromId);
             // add 'from' to graph
         }
-        this.to = Graph.findNode(to);
+        this.to = graph.findNode(toId);
         if (this.to == null) {
-            this.to = new Node(to.getId());
-            // add 'to' to graph
+            this.to = new Node(toId);
         }
         this.bandwidth = bandwidth;
 

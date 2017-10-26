@@ -1,1 +1,56 @@
-import java.util.ArrayList;/** * Created by PavelHabzansky on 11.10.17. */public class Graph {    private static ArrayList<Node> nodes;    private static ArrayList<Edge> edges;    public Graph() {        this.nodes = new ArrayList<>();        this.edges = new ArrayList<>();    }    public void addEdge(Node from, Node to, int bandwidth) {        Edge temporary = findEdge(from, to);        if (temporary != null) {            temporary.updateBandwidth(bandwidth);        } else {            Edge newEdge = new Edge(from, to, bandwidth);            edges.add(newEdge);        }    }    public static Node findNode(Node node) {        for(Node each : nodes) {            if (each.getId().compareTo(node.getId()) == 0) {                return each;            }        }        return null;    }    public static Edge findEdge(Node from, Node to) {        for (Edge each : edges) {            if (each.getFrom().getId().equals(from.getId()) && each.getTo().getId().equals(to.getId())) {                return each;            }        }        return null;    }//    public static Edge findEdge() {////    }}
+
+import java.util.ArrayList;
+
+/**
+ * Created by PavelHabzansky on 26.10.17.
+ */
+public class Graph {
+
+    private static Graph INSTANCE;
+
+    private static ArrayList<Node> nodes;
+    private static ArrayList<Edge> edges;
+
+    public static Graph getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new Graph();
+        return INSTANCE;
+    }
+
+    public Node findNode(String nodeId) {
+        for(Node each : nodes) {
+            if (each.getId().compareTo(nodeId) == 0) {
+                return each;
+            }
+        }
+        return null;
+    }
+
+    public void addEdge(String fromId, String toId, int bandwidth) {
+        Edge newEdge = new Edge(fromId, toId, bandwidth);
+        edges.add(newEdge);
+        nodes.add(new Node(fromId));
+        nodes.add(new Node(toId));
+    }
+
+    public Edge findEdge(Node from, Node to) {
+        for (Edge each : edges) {
+            if (each.getFrom().getId().equals(from.getId()) && each.getTo().getId().equals(to.getId())) {
+                return each;
+            }
+        }
+        return null;
+    }
+
+    public void printGraph() {
+        for (Edge each : edges) {
+            System.out.println(each);
+        }
+    }
+
+    private Graph(){
+        nodes = new ArrayList<>();
+        edges = new ArrayList<>();
+    }
+
+}
