@@ -9,6 +9,7 @@ public class Node {
     // TODO implement VISITED / UNVISITED state Enum type for Dijkstra
 
     private String id;
+    private SmartStack smartStack;
     private ArrayList<Node> predecessors;
     private ArrayList<Node> successors;
 
@@ -16,7 +17,7 @@ public class Node {
         this.id = id;
         this.predecessors = new ArrayList<>();
         this.successors = new ArrayList<>();
-        // TODO set state to unvisited
+        this.smartStack = new SmartStack();
     }
 
     public String getId() {
