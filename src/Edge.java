@@ -36,7 +36,7 @@ public class Edge {
         return this.to;
     }
 
-    public int getReliability() {
+    public int getErrorChance() {
         return this.errorChance;
     }
 

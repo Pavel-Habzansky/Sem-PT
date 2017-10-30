@@ -3,6 +3,8 @@ import java.io.*;
 /**
  * Created by PavelHabzansky on 11.10.17.
  */
+
+// Thread.sleep(1000) can be used for simulation
 public class Main {
 
     public static void loadGraph(String filename) {

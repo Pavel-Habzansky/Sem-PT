@@ -8,8 +8,8 @@ public class Graph {
 
     private static Graph INSTANCE;
 
-    private static ArrayList<Node> nodes;
-    private static ArrayList<Edge> edges;
+    private ArrayList<Node> nodes;
+    private ArrayList<Edge> edges;
 
     public static Graph getInstance() {
         if (INSTANCE == null)
