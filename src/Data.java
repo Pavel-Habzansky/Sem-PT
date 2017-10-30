@@ -1,5 +1,5 @@
 /**
- * Created by PavelHabzansky on 29.10.17.
+ * Created by Jakub Mikeš on 29.10.17.
  */
 public class Data {
 
