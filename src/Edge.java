@@ -6,10 +6,11 @@ public class Edge {
     private Node from;
     private Node to;
     private int bandwidth;
+    private int errorChance;
 
     private Graph graph = Graph.getInstance();
 
-    public Edge(String fromId, String toId, int bandwidth) {
+    public Edge(String fromId, String toId, int bandwidth, int errorChance) {
         this.from = graph.findNode(fromId);
         if (this.from == null) {
             this.from = new Node(fromId);
@@ -20,6 +21,7 @@ public class Edge {
             this.to = new Node(toId);
         }
         this.bandwidth = bandwidth;
+        this.errorChance = errorChance;
 
         this.from.addSuccessor(this.to);
         this.to.addPredecessor(this.from);
@@ -33,17 +35,21 @@ public class Edge {
         return this.to;
     }
 
+    public int getReliability() {
+        return this.errorChance;
+    }
+
     public int getBandwidth() {
         return this.bandwidth;
     }
 
-    public void updateBandwidth(int newVal) {
-        this.bandwidth = newVal;
-    }
+//    public void updateBandwidth(int newVal) {
+//        this.bandwidth = newVal;
+//    }
 
-    @Override
-    public String toString() {
-        return "Hrana z " + from + " do " + to + " s propustnosti " + bandwidth;
-    }
+        @Override
+        public String toString () {
+            return "Hrana z " + from + " do " + to + " s propustnosti " + bandwidth + " chybovost " + errorChance;
+        }
 
-}
+    }

@@ -26,8 +26,8 @@ public class Graph {
         return null;
     }
 
-    public void addEdge(String fromId, String toId, int bandwidth) {
-        Edge newEdge = new Edge(fromId, toId, bandwidth);
+    public void addEdge(String fromId, String toId, int bandwidth, int errorChance) {
+        Edge newEdge = new Edge(fromId, toId, bandwidth, errorChance);
         edges.add(newEdge);
         nodes.add(new Node(fromId));
         nodes.add(new Node(toId));

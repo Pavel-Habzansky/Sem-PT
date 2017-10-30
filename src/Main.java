@@ -14,11 +14,13 @@ public class Main {
                 String fromId = split[0];
                 String toId = split[1];
                 int bandwidth = Integer.parseInt(split[2]);
+                int errorChance = Integer.parseInt(split[3]);
                 Graph.getInstance()
                         .addEdge(
                                 fromId,
                                 toId,
-                                bandwidth);
+                                bandwidth,
+                                errorChance);
             }
             Graph.getInstance()
                     .printGraph();
