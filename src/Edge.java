@@ -14,11 +14,12 @@ public class Edge {
         this.from = graph.findNode(fromId);
         if (this.from == null) {
             this.from = new Node(fromId);
-            // add 'from' to graph
+            graph.addNode(this.from);
         }
         this.to = graph.findNode(toId);
         if (this.to == null) {
             this.to = new Node(toId);
+            graph.addNode(this.to);
         }
         this.bandwidth = bandwidth;
         this.errorChance = errorChance;
@@ -43,13 +44,9 @@ public class Edge {
         return this.bandwidth;
     }
 
-//    public void updateBandwidth(int newVal) {
-//        this.bandwidth = newVal;
-//    }
-
-        @Override
-        public String toString () {
-            return "Hrana z " + from + " do " + to + " s propustnosti " + bandwidth + " chybovost " + errorChance;
-        }
-
+    @Override
+    public String toString() {
+        return "Hrana z " + from + " do " + to + " s propustnosti " + bandwidth + " chybovost " + errorChance;
     }
+
+}

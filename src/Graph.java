@@ -17,6 +17,10 @@ public class Graph {
         return INSTANCE;
     }
 
+    public void addNode(Node node) {
+        nodes.add(node);
+    }
+
     public Node findNode(String nodeId) {
         for(Node each : nodes) {
             if (each.getId().compareTo(nodeId) == 0) {
