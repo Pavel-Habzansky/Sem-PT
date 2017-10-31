@@ -5,12 +5,12 @@ public class Edge {
 
     private Node from;
     private Node to;
-    private int bandwidth;
-    private int errorChance;
+    private double bandwidth;
+    private double errorChance;
 
     private Graph graph = Graph.getInstance();
 
-    public Edge(String fromId, String toId, int bandwidth, int errorChance) {
+    public Edge(String fromId, String toId, double bandwidth, double errorChance) {
         this.from = graph.findNode(fromId);
         if (this.from == null) {
             this.from = new Node(fromId);
@@ -36,11 +36,11 @@ public class Edge {
         return this.to;
     }
 
-    public int getErrorChance() {
+    public double getErrorChance() {
         return this.errorChance;
     }
 
-    public int getBandwidth() {
+    public double getBandwidth() {
         return this.bandwidth;
     }
 

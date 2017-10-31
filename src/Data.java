@@ -3,7 +3,7 @@
  */
 public class Data {
 
-    private int dataSize;
+    private double dataSize;
     private Node source;
     private Node destination;
 
@@ -13,7 +13,7 @@ public class Data {
         this.destination = destination;
     }
 
-    public int getDataSize() {
+    public double getDataSize() {
         return this.dataSize;
     }
 

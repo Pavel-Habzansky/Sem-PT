@@ -15,8 +15,8 @@ public class Main {
                 String[] split = line.split(" ");
                 String fromId = split[0];
                 String toId = split[1];
-                int bandwidth = Integer.parseInt(split[2]);
-                int errorChance = Integer.parseInt(split[3]);
+                double bandwidth = Double.parseDouble(split[2]);
+                double errorChance = Double.parseDouble(split[3]);
                 Graph.getInstance()
                         .addEdge(
                                 fromId,
@@ -32,7 +32,23 @@ public class Main {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        loadGraph("uzly.txt");
+        /**
+         * Test of loadGraph
+         */
+//        loadGraph("uzly.txt");
+
+        /**
+         * Stack size check
+         */
+        SmartStack stack = new SmartStack();
+        stack.push(new Data(1, new Node("id1"), new Node("id2")));
+        stack.push(new Data(2, new Node("id1"), new Node("id2")));
+        stack.push(new Data(3, new Node("id1"), new Node("id2")));
+        stack.push(new Data(4, new Node("id1"), new Node("id2")));
+        stack.push(new Data(5, new Node("id1"), new Node("id2")));
+        stack.push(new Data(6, new Node("id1"), new Node("id2")));
+        stack.printStack();
+
     }
 
 }

@@ -30,7 +30,7 @@ public class Graph {
         return null;
     }
 
-    public void addEdge(String fromId, String toId, int bandwidth, int errorChance) {
+    public void addEdge(String fromId, String toId, double bandwidth, double errorChance) {
         Edge newEdge = new Edge(fromId, toId, bandwidth, errorChance);
         edges.add(newEdge);
         nodes.add(new Node(fromId));
