@@ -19,11 +19,21 @@ public class SmartStack {
         return dataSum;
     }
 
+    public boolean isEmpty() {
+        return (topElementIndex == 0);
+    }
+
     public void increaseSize() {
         Data[] increasedStackedData = new Data[stackedData.length*2];
         System.arraycopy(stackedData, 0,
                 increasedStackedData, 0, stackedData.length);
         this.stackedData = increasedStackedData;
+    }
+
+    public Data pop() {
+        Data data = stackedData[topElementIndex];
+        topElementIndex--;
+        return data;
     }
 
     public void push(Data data) {

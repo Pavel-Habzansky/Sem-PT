@@ -52,6 +52,46 @@ public class Graph {
         }
     }
 
+    public void send(Data data) {
+        if (data.getSource()
+                .getSuccessors()
+                .contains(data.getDestination())){
+            data.getDestination()
+                    .getData()
+                    .add(data);
+        } else {
+            Node current = data.getSource();
+            for (int i = 1; current != data.getDestination(); i++) {
+                sleepSecond();
+                Node next = data.getCesta()[i];
+                Edge edge = findEdge(current, next);
+                double bandwidth = edge.getBandwidth();
+                if (data.getDataSize() > bandwidth){
+
+//                    double toBeStacked = data.getDataSize() - bandwidth;
+//                    current.getSmartStack().push(new Data(toBeStacked, current, data.getDestination()));
+//
+//                    while (!current.getSmartStack().isEmpty()) {
+//                        Data rest = current.getSmartStack().pop();
+//                        send(rest);
+//                    }
+
+                }
+
+                current = data.getCesta()[i];
+            }
+        }
+        System.out.println("finish");
+    }
+
+    public void sleepSecond() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
     private Graph(){
         nodes = new ArrayList<>();
         edges = new ArrayList<>();

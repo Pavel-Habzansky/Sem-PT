@@ -6,8 +6,9 @@ public class Data {
     private double dataSize;
     private Node source;
     private Node destination;
+    private Node[] cesta;
 
-    public Data(int dataSize, Node source, Node destination) {
+    public Data(double dataSize, Node source, Node destination) {
         this.dataSize = dataSize;
         this.source = source;
         this.destination = destination;
@@ -23,5 +24,21 @@ public class Data {
 
     public Node getSource() {
         return this.source;
+    }
+
+    public Node[] getCesta() {
+        return this.cesta;
+    }
+
+    public void send() {
+        if (this.source.getSuccessors().contains(this.destination)) {
+            this.destination.getData().add(this);
+        } else {
+            Node current = this.source;
+            for (int i = 1; current != destination; i++) {
+                current = cesta[i];
+            }
+        }
+        System.out.println("finish");
     }
 }

@@ -12,12 +12,17 @@ public class Node {
     private SmartStack smartStack;
     private ArrayList<Node> predecessors;
     private ArrayList<Node> successors;
+    private ArrayList<Data> data;
 
     public Node(String id) {
         this.id = id;
         this.predecessors = new ArrayList<>();
         this.successors = new ArrayList<>();
         this.smartStack = new SmartStack();
+    }
+
+    public SmartStack getSmartStack() {
+        return smartStack;
     }
 
     public String getId() {
@@ -38,6 +43,10 @@ public class Node {
 
     public ArrayList<Node> getSuccessors() {
         return this.successors;
+    }
+
+    public ArrayList<Data> getData() {
+        return data;
     }
 
     @Override
