@@ -30,15 +30,4 @@ public class Data {
         return this.cesta;
     }
 
-//    public void send() {
-//        if (this.source.getSuccessors().contains(this.destination)) {
-//            this.destination.getData().add(this);
-//        } else {
-//            Node current = this.source;
-//            for (int i = 1; current != destination; i++) {
-//                current = cesta[i];
-//            }
-//        }
-//        System.out.println("finish");
-//    }
 }

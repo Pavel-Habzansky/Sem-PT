@@ -14,23 +14,10 @@ public class Edge {
 
     public Edge(Node node1, Node node2, double bandwidth, double errorChance) {
         this.node1 = (node1.getId().compareTo(node2.getId()) <= 0) ? node1 : node2;
-//        if (this.node1 == null) {
-//            this.node1 = new Node(fromId);
-//            graph.addNode(this.node1);
-//        }
         this.node2 = (this.node1==node1) ? node2 : node1;
-//        if (this.node2 == null) {
-//            this.node2 = new Node(toId);
-//            graph.addNode(this.node2);
-//        }
+
         this.bandwidth = bandwidth;
         this.errorChance = errorChance;
-
-//        this.node1.addNeighbour(this.node2);
-//        this.node2.addNeighbour(this.node1);
-
-//        this.from.addSuccessor(this.to);
-//        this.to.addPredecessor(this.from);
     }
 
     public Node getNode1() {

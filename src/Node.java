@@ -74,20 +74,4 @@ public class Node {
         return "Uzel " + id;
     }
 
-    //    public ArrayList<Node> getPredecessors() {
-//        return this.predecessors;
-//    }
-//
-//    public ArrayList<Node> getSuccessors() {
-//        return this.successors;
-//    }
-
-    //    public void addPredecessor(Node node) {
-//        this.predecessors.add(node);
-//    }
-//
-//    public void addSuccessor(Node node) {
-//        this.successors.add(node);
-//    }
-
 }
