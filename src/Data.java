@@ -2,9 +2,9 @@
 import java.util.Stack;
 
 /**
- * Created by PavelHabzansky on 14.11.17.
+ * Created by Jakub Mikeš on 14.11.17.
  */
-public class Data {
+public class Data implements IPacket {
 
     private double size;
     private Node position;
@@ -20,30 +20,6 @@ public class Data {
         this.path = path;
     }
 
-    public double getSize() {
-        return size;
-    }
-
-    public void setSize(double newSize) {
-        this.size = newSize;
-    }
-
-    public void setPosition(Node newPosition) {
-        this.position = newPosition;
-    }
-
-    public Node getSource() {
-        return source;
-    }
-
-    public Node getDestination() {
-        return destination;
-    }
-
-    public Node getPosition() {
-        return position;
-    }
-
     public Stack<Node> getPath() {
         return path;
     }
@@ -51,5 +27,36 @@ public class Data {
     public void setPath(Stack<Node> newPath) {
         this.path = newPath;
     }
+
+
+
+    public void setSize(double newSize) {
+        this.size = newSize;
+    }
+
+    @Override
+    public void setPosition(Node newPosition) {
+        this.position = newPosition;
+    }
+
+    @Override
+    public double getSize() {
+        return size;
+    }
+
+    @Override
+    public Node getSource() {
+        return source;
+    }
+    @Override
+    public Node getDestination() {
+        return destination;
+    }
+    @Override
+    public Node getPosition() {
+        return position;
+    }
+
+
 
 }

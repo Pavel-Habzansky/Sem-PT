@@ -1,7 +1,7 @@
 /**
  * Created by PavelHabzansky on 14.11.17.
  */
-public class DataPart {
+public class DataPart implements IPacket {
 
     private double size;
     private Data parent;
@@ -13,21 +13,33 @@ public class DataPart {
         this.position = position;
     }
 
-    public double getSize() {
-        return size;
-    }
-
     public Data getParent() {
         return parent;
     }
 
+    @Override
+    public Node getSource() {
+        return getParent().getSource();
+    }
+
+    @Override
+    public double getSize() {
+        return size;
+    }
+
+    @Override
+    public Node getDestination() {
+        return getParent().getPosition();
+    }
+
+    @Override
     public Node getPosition() {
         return position;
     }
 
+    @Override
     public void setPosition(Node newPosition) {
         this.position = newPosition;
     }
-
 
 }

@@ -4,9 +4,15 @@
 public class Node {
 
     private String id;
+    private SmartStack smartStack;
 
     public Node(String id) {
         this.id = id;
+        this.smartStack = new SmartStack();
+    }
+
+    public double getSmartStackLoad() {
+        return this.smartStack.getStackedData();
     }
 
     public String getId() {

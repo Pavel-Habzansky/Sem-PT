@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class Main {
 
@@ -67,12 +68,18 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        ArrayList<Edge> edges = loadEdges("hrany.txt");
-        HashMap<String, Integer> indexMap = generateIndexMap(edges);
-        Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
+//        ArrayList<Edge> edges = loadEdges("hrany.txt");
+//        HashMap<String, Integer> indexMap = generateIndexMap(edges);
+//        Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
+//
+//        Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
+//        System.out.println(edgeAdjacencyMatrix[0].length);
+//        graph.printMatrix();
 
-        Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
-        System.out.println(edgeAdjacencyMatrix[0].length);
-        graph.printMatrix();
+        Edge edge = new Edge(new Node("1"), new Node("2"),100, 0.2);
+        Data data = new Data(20, new Node("1"), new Node("2"), new Stack<>());
+        edge.setLoadForNextStep(data);
+        System.out.println(edge.getLoad());
+        System.out.println(edge.canFail());
     }
 }
