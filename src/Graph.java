@@ -5,22 +5,33 @@ import java.util.HashMap;
  */
 public class Graph {
 
+    private static Graph INSTANCE;
+
     private Edge[][] matrix;
     private HashMap<String, Integer> indexMap;
 
-    public Graph(Edge[][] matrix, HashMap<String, Integer> indexMap) {
-        this.matrix = matrix;
+    private Graph(HashMap<String, Integer> indexMap, Edge[][] matrix) {
         this.indexMap = indexMap;
+        this.matrix = matrix;
     }
 
-    public void addEdge(Edge edge) {
-        Node node1 = edge.getNode1();
-        Node node2 = edge.getNode2();
-        Edge symetricEdge = new Edge(node2, node1, edge.getBandwidth(), edge.getErrorChance());
-        int indexNode1 = indexMap.get(node1.getId());
-        int indexNode2 = indexMap.get(node2.getId());
-        matrix[indexNode1][indexNode2] = edge;
-        matrix[indexNode2][indexNode1] = symetricEdge;
+    public static Graph getInstance(HashMap<String, Integer> indexMap, Edge[][] matrix) {
+        if (INSTANCE == null)
+            INSTANCE = new Graph(indexMap, matrix);
+        return INSTANCE;
+    }
+
+    public void printMatrix() {
+        for (int i = 0; i < matrix.length; i++) {
+            System.out.print("[ ");
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] != null)
+                    System.out.print(matrix[i][j].getBandwidth() + " ");
+                else
+                    System.out.print("null ");
+            }
+            System.out.println("]");
+        }
     }
 
 }

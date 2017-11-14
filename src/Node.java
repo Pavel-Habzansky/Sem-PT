@@ -13,4 +13,10 @@ public class Node {
         return id;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        Node other = (Node) object;
+        return this.id.equals(other.getId());
+    }
+
 }
