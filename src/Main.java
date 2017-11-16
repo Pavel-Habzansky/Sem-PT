@@ -68,18 +68,23 @@ public class Main {
     }
 
     public static void main(String[] args) {
-//        ArrayList<Edge> edges = loadEdges("hrany.txt");
-//        HashMap<String, Integer> indexMap = generateIndexMap(edges);
-//        Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
-//
-//        Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
-//        System.out.println(edgeAdjacencyMatrix[0].length);
-//        graph.printMatrix();
+        ArrayList<Edge> edges = loadEdges("hrany.txt");
+        HashMap<String, Integer> indexMap = generateIndexMap(edges);
+        Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
 
-        Edge edge = new Edge(new Node("1"), new Node("2"),100, 0.2);
-        Data data = new Data(20, new Node("1"), new Node("2"), new Stack<>());
-        edge.setLoadForNextStep(data);
-        System.out.println(edge.getLoad());
-        System.out.println(edge.canFail());
+        Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
+        System.out.println(edgeAdjacencyMatrix[0].length);
+        graph.printMatrix();
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(new Node("destination"));
+        Data data = new Data(1200, new Node("source"), new Node("destination"), stack);
+        graph.sendDataPackets(data);
+
+//        Edge edge = new Edge(new Node("1"), new Node("2"),100, 0.2);
+//        Data data = new Data(20, new Node("1"), new Node("2"), new Stack<>());
+//        edge.setLoadForNextStep(data);
+//        System.out.println(edge.getLoad());
+//        System.out.println(edge.canFail());
     }
 }

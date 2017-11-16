@@ -1,4 +1,5 @@
 
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -20,15 +21,11 @@ public class Data implements IPacket {
         this.path = path;
     }
 
-    public Stack<Node> getPath() {
-        return path;
-    }
+
 
     public void setPath(Stack<Node> newPath) {
         this.path = newPath;
     }
-
-
 
     public void setSize(double newSize) {
         this.size = newSize;
@@ -37,6 +34,11 @@ public class Data implements IPacket {
     @Override
     public void setPosition(Node newPosition) {
         this.position = newPosition;
+    }
+
+    @Override
+    public Stack<Node> getPath() {
+        return path;
     }
 
     @Override

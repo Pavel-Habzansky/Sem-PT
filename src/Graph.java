@@ -34,4 +34,21 @@ public class Graph {
         }
     }
 
+    // TODO just a test
+    public void sendDataPackets(IPacket data) {
+        Node nextJump = data.getPath().pop();
+        int fromIndex = indexMap.get(data.getPosition().getId());
+        int toIndex = indexMap.get(nextJump.getId());
+        Edge line = matrix[fromIndex][toIndex];
+        line.setLoadForNextStep(data);
+        if (!line.canFail()){
+            System.out.println("Line is not too loaded, packet can get through");
+            data.setPosition(nextJump);
+            if (data.getPosition().equals(data.getDestination()))
+                System.out.println("Data is in its destination!");
+        } else {
+            System.out.println("Line is too loaded. Aborting... ");
+        }
+    }
+
 }
