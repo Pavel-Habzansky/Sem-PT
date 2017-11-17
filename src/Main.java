@@ -79,7 +79,14 @@ public class Main {
         System.out.println(edgeAdjacencyMatrix[0].length);
         graph.printMatrix();
 
-        graph.dfs(edgeAdjacencyMatrix[0][5].getNode1(), edgeAdjacencyMatrix[0][5].getNode2(), new ArrayList<>());
+        boolean[] visited = new boolean[edgeAdjacencyMatrix[0].length];
+        graph.dfs(2,5,visited);
+
+//        graph.dfs(1,6);
+
+//        System.out.println(graph.edgeExists("id3", "id4"));
+
+//        graph.dfs(edgeAdjacencyMatrix[0][5].getNode1(), edgeAdjacencyMatrix[0][5].getNode2(), new ArrayList<>());
 
 //
 //        Stack<Node> stack = new Stack<>();
