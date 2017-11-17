@@ -55,6 +55,9 @@ public class Main {
                     edge.getBandwidth(),
                     edge.getErrorChance());
 
+            edge.getNode1().getNeighbors().add(edge.getNode2());
+            edge.getNode2().getNeighbors().add(edge.getNode1());
+
             String node1Id = edge.getNode1().getId();
             String node2Id = edge.getNode2().getId();
             int node1Index = indexMap.get(node1Id);
@@ -76,10 +79,16 @@ public class Main {
         System.out.println(edgeAdjacencyMatrix[0].length);
         graph.printMatrix();
 
-        Stack<Node> stack = new Stack<>();
-        stack.push(new Node("destination"));
-        Data data = new Data(1200, new Node("source"), new Node("destination"), stack);
-        graph.sendDataPackets(data);
+        graph.dfs(edgeAdjacencyMatrix[0][5].getNode1(), edgeAdjacencyMatrix[0][5].getNode2(), new ArrayList<>());
+
+//
+//        Stack<Node> stack = new Stack<>();
+//        stack.push(new Node("destination"));
+//        Data data = new Data(1200, new Node("source"), new Node("destination"), stack);
+
+
+
+//        graph.dfs(new Node("id1"), new Node("id3"), new ArrayList<Node>());
 
 //        Edge edge = new Edge(new Node("1"), new Node("2"),100, 0.2);
 //        Data data = new Data(20, new Node("1"), new Node("2"), new Stack<>());
