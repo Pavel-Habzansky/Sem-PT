@@ -2,7 +2,6 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Stack;
 
 /**
  * Created by PavelHabzansky on 13.11.17.
@@ -12,14 +11,14 @@ public class Graph {
     private static Graph INSTANCE;
 
     private Edge[][] matrix;
-    private HashMap<String, Integer> indexMap;
+    private HashMap<Node, Integer> indexMap;
 
-    private Graph(HashMap<String, Integer> indexMap, Edge[][] matrix) {
+    private Graph(HashMap<Node, Integer> indexMap, Edge[][] matrix) {
         this.indexMap = indexMap;
         this.matrix = matrix;
     }
 
-    public static Graph getInstance(HashMap<String, Integer> indexMap, Edge[][] matrix) {
+    public static Graph getInstance(HashMap<Node, Integer> indexMap, Edge[][] matrix) {
         if (INSTANCE == null)
             INSTANCE = new Graph(indexMap, matrix);
         return INSTANCE;
@@ -38,8 +37,8 @@ public class Graph {
         }
     }
 
-    public String getNodeIdFromKey(int key) {
-        for (String o : indexMap.keySet()) {
+    public Node getNodeFromKey(int key) {
+        for (Node o : indexMap.keySet()) {
             if (indexMap.get(o).equals(key)) {
                 return o;
             }
@@ -53,52 +52,52 @@ public class Graph {
         System.out.println();
     }
 
-    // TODO modify to traverse based on bandwidth - higher = better
-    // works, not as wished
-    public void dfs(int source, int destination, boolean[] visited) {
-        if (source == destination) {
-            System.out.println(destination);
-            return;
-        }
-        if (!visited[source]) {
-            visited[source] = true;
-            System.out.print(source + " ");
-
-            for (int i = 0; i < matrix[source].length; i++) {
-                if (matrix[source][i] != null && !visited[i]) {
-                    dfs(i, destination, visited);
-                    return;
-                }
+    public void initPaths() {
+        for (int i = 0; i < matrix[0].length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (i == j)
+                    continue;
+                dfs(i, j, new ArrayList<>(),i);
             }
         }
     }
 
-    // does something reasonable
-//    public void dfs(int source, int destination) {
-//        Stack<Integer> stack = new Stack<>();
-//        int v, i;
-//        int[] isVisited = new int[matrix[0].length];
-//
-//        stack.push(source);
-//        while (!stack.isEmpty()) {
-//            v = stack.pop();
-//            if (isVisited[v] == 0) {
-//                System.out.print("\n" + (getNodeIdFromKey(v)));
-//                isVisited[v] = 1;
-//            }
-//            for (i = 0; i < destination; i++) {
-//                if (matrix[v][i] != null && isVisited[i] == 0) {
-//                    stack.push(v);
-//                    isVisited[i] = 1;
-//                    System.out.println(" " + (getNodeIdFromKey(i)));
-//                    v = i;
-//                }
-//            }
-//        }
-//    }
+
+    public void dfs(int source, int destination, ArrayList<Integer> visited, final int sourceFinal) {
+        int current;
+        visited.add(source);
+        for (int i = 0; i < matrix[0].length; i++) {
+            if (matrix[source][i] != null) {
+                current = i;
+                if (source == destination) {
+
+                    ArrayList<Integer> path = new ArrayList<>();
+                    for (Integer node : visited)
+                        path.add(node);
+                    Node sourceNode = getNodeFromKey(sourceFinal);
+                    sourceNode.getPaths().put(destination, path);
+
+                    System.out.println(visited + " ");
+                    double maxCapacity = matrix[visited.get(0)][visited.get(1)].getBandwidth();
+                    for (int j = 1; j < visited.size() - 1; j++) {
+                        maxCapacity += matrix[visited.get(j)][visited.get(j + 1)].getBandwidth();
+                    }
+
+                    System.out.print(maxCapacity);
+                    System.out.println();
+                    visited.remove(new Integer(source));
+                    return;
+                }
+                if (!(visited.contains(current))) {
+                    dfs(current, destination, visited, sourceFinal);
+                }
+            }
+        }
+        visited.remove(new Integer(source));
+    }
 
     public boolean edgeExists(String nodeId1, String nodeId2) {
-        if (matrix[indexMap.get(nodeId1)][indexMap.get(nodeId2)] != null)
+        if (matrix[indexMap.get(new Node(nodeId1))][indexMap.get(new Node(nodeId2))] != null)
             return true;
         return false;
     }
