@@ -9,7 +9,7 @@ public class DataPart implements IPacket {
     private double size;
     private Data parent;
     private Node position;
-    private Stack<Node> path;
+    private Path path;
 
     public DataPart(double size, Data parent, Node position) {
         this.size = size;
@@ -23,7 +23,7 @@ public class DataPart implements IPacket {
     }
 
     @Override
-    public Stack<Node> getPath() {
+    public Path getPath() {
         return path;
     }
 

@@ -10,19 +10,18 @@ public class Data implements IPacket {
     private Node position;
     private Node source;
     private Node destination;
-    private Stack<Node> path;
+    private Path path;
 
-    public Data(double size, Node source, Node destination, Stack<Node> path) {
+    public Data(double size, Node source, Node destination) {
         this.size = size;
         this.source = source;
         this.position = source;
         this.destination = destination;
-        this.path = path;
     }
 
 
 
-    public void setPath(Stack<Node> newPath) {
+    public void setPath(Path newPath) {
         this.path = newPath;
     }
 
@@ -36,7 +35,7 @@ public class Data implements IPacket {
     }
 
     @Override
-    public Stack<Node> getPath() {
+    public Path getPath() {
         return path;
     }
 
