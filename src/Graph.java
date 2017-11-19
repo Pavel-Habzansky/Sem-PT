@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * Created by PavelHabzansky on 13.11.17.
@@ -62,6 +63,10 @@ public class Graph {
         }
     }
 
+    public int getSize() {
+        return matrix[0].length;
+    }
+
 
     public void dfs(int source, int destination, ArrayList<Integer> visited, final int sourceFinal) {
         int current;
@@ -71,20 +76,18 @@ public class Graph {
                 current = i;
                 if (source == destination) {
 
-                    ArrayList<Integer> path = new ArrayList<>();
-                    for (Integer node : visited)
-                        path.add(node);
-                    Node sourceNode = getNodeFromKey(sourceFinal);
-                    sourceNode.getPaths().put(destination, path);
-
-                    System.out.println(visited + " ");
-                    double maxCapacity = matrix[visited.get(0)][visited.get(1)].getBandwidth();
+                    double sumBandwidth = matrix[visited.get(0)][visited.get(1)].getBandwidth();
                     for (int j = 1; j < visited.size() - 1; j++) {
-                        maxCapacity += matrix[visited.get(j)][visited.get(j + 1)].getBandwidth();
+                        sumBandwidth += matrix[visited.get(j)][visited.get(j + 1)].getBandwidth();
                     }
 
-                    System.out.print(maxCapacity);
-                    System.out.println();
+                    LinkedList<Integer> indexPath = new LinkedList<>();
+                    for (Integer node : visited)
+                        indexPath.add(node);
+                    Path path = new Path(indexPath, sumBandwidth);
+                    Node sourceNode = getNodeFromKey(sourceFinal);
+                    sourceNode.addPath(destination, path);
+
                     visited.remove(new Integer(source));
                     return;
                 }

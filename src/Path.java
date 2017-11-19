@@ -2,34 +2,31 @@ import java.util.LinkedList;
 
 public class Path {
 
-public LinkedList<Edge> path;
-public double sum;
+    public LinkedList<Integer> path;
+    public Double sum;
 
 
-public Path(LinkedList<Edge> path){
-	this.path = path;
-		makeSum();
-}
+    public Path(LinkedList<Integer> path, double sum) {
+        this.path = path;
+        this.sum = sum;
+    }
 
-public void makeSum(){
-	double sum=0;
-	
-	for(int i=0; i<path.size();i++){
-		sum +=(double) path.get(i).getBandwidth(); 
-	}
-	this.sum=sum;
-}
+    public void printPath() {
+        System.out.println("Path from "+path.get(0)+" to "+path.get(path.size()-1));
+        for (Integer index : path)
+            System.out.print(index + " ");
+        System.out.println("\nSum of bandwidths: "+sum);
+    }
 
-public LinkedList<Edge> getPath(){
-	return path;
-}
+    public LinkedList<Integer> getPath() {
+        return path;
+    }
 
-public void setPath(LinkedList<Edge> path){
-	this.path= path;
-	makeSum();
-}
+    public void setPath(LinkedList<Integer> path) {
+        this.path = path;
+    }
 
-public double getSum(){
-	return sum;
-	}
+    public Double getSum() {
+        return sum;
+    }
 }

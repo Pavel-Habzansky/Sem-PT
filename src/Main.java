@@ -73,17 +73,14 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Edge> edges = loadEdges("hrany.txt");
         HashMap<Node, Integer> indexMap = generateIndexMap(edges);
-        System.out.println(indexMap.size());
         Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
 
         Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
+        graph.initPaths();
         graph.printMatrix();
 
-        boolean[] visited = new boolean[edgeAdjacencyMatrix[0].length];
-        graph.dfs(2,5,new ArrayList<>(),2);
-        System.out.println(graph.getNodeFromKey(2).getPaths().values());
-
-//        graph.initPaths();
+        for (int i = 0; i < graph.getSize(); i++)
+            graph.getNodeFromKey(i).printPathsToOthers();
 
 
 

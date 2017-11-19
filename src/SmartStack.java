@@ -4,7 +4,7 @@
 public class SmartStack {
 
     private final int SIZE = 100;
-    private DataPart [] stackedData = new DataPart[5];
+    private DataPart[] stackedData = new DataPart[5];
 
     private int topElementIndex;
 
@@ -24,7 +24,7 @@ public class SmartStack {
     }
 
     public void increaseSize() {
-        DataPart[] increasedStackedData = new DataPart[stackedData.length*2];
+        DataPart[] increasedStackedData = new DataPart[stackedData.length * 2];
         System.arraycopy(stackedData, 0,
                 increasedStackedData, 0, stackedData.length);
         this.stackedData = increasedStackedData;
@@ -37,20 +37,18 @@ public class SmartStack {
     }
 
     public void push(DataPart data) {
-        if (isStackFull()){
+        if (isStackFull()) {
             System.out.println("Stack is full. Increasing size... ");
             increaseSize();
-            System.out.println("Size increased to: "+stackedData.length);
+            System.out.println("Size increased to: " + stackedData.length);
         }
         stackedData[topElementIndex] = data;
         topElementIndex++;
     }
 
     public boolean isStackFull() {
-        if (stackedData[stackedData.length-1] != null){
-//            System.out.println("Stack is full");
+        if (stackedData[stackedData.length - 1] != null)
             return true;
-        }
         return false;
     }
 
@@ -62,7 +60,7 @@ public class SmartStack {
         for (int i = 0; i < stackedData.length; i++) {
             if (stackedData[i] == null)
                 return;
-            System.out.println("Data: "+stackedData[i].getSize());
+            System.out.println("Data: " + stackedData[i].getSize());
         }
     }
 
