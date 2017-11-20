@@ -17,16 +17,20 @@ public class Edge {
         this.load = 0;
     }
 
-    public boolean canFail() {
-        return (load >= errorChance);
+    public boolean canFail(double dataSize) {
+        return (getLoadForNextStep(dataSize) >= errorChance);
+    }
+
+    public double getLoadForNextStep(double dataSize) {
+        return dataSize/(bandwidth/100)/100;
     }
 
     public void resetLoad() {
         this.load = 0;
     }
 
-    public void setLoadForNextStep(IPacket nextData) {
-        this.load += nextData.getSize()/(bandwidth/100)/100;
+    public void setLoadForNextStep(double dataSize) {
+        this.load += dataSize/(bandwidth/100)/100;
     }
 
     public double getLoad() {

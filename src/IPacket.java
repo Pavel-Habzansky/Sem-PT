@@ -11,6 +11,7 @@ public interface IPacket {
     Node getPosition();
     void setPosition(Node node);
     Path getPath();
+    void setPath(Path path);
 
 
 }

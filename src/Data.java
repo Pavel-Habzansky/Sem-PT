@@ -21,10 +21,6 @@ public class Data implements IPacket {
 
 
 
-    public void setPath(Path newPath) {
-        this.path = newPath;
-    }
-
     public void setSize(double newSize) {
         this.size = newSize;
     }
@@ -32,6 +28,11 @@ public class Data implements IPacket {
     @Override
     public void setPosition(Node newPosition) {
         this.position = newPosition;
+    }
+
+    @Override
+    public void setPath(Path newPath) {
+        this.path = newPath;
     }
 
     @Override
@@ -55,6 +56,11 @@ public class Data implements IPacket {
     @Override
     public Node getPosition() {
         return position;
+    }
+
+    @Override
+    public String toString() {
+        return "Data packet: \nSource: "+source+"\nDestination: "+destination;
     }
 
 

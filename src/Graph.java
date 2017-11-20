@@ -13,6 +13,7 @@ public class Graph {
 
     private Edge[][] matrix;
     private HashMap<Node, Integer> indexMap;
+    private HashMap<Integer, Data> dataRequests;
 
     private Graph(HashMap<Node, Integer> indexMap, Edge[][] matrix) {
         this.indexMap = indexMap;
@@ -23,6 +24,10 @@ public class Graph {
         if (INSTANCE == null)
             INSTANCE = new Graph(indexMap, matrix);
         return INSTANCE;
+    }
+
+    public void setDataRequests(HashMap<Integer, Data> dataRequests) {
+        this.dataRequests = dataRequests;
     }
 
     public void printMatrix() {
@@ -58,7 +63,7 @@ public class Graph {
             for (int j = 0; j < matrix[0].length; j++) {
                 if (i == j)
                     continue;
-                dfs(i, j, new ArrayList<>(),i);
+                dfs(i, j, new ArrayList<>(), i);
             }
         }
     }
@@ -105,21 +110,48 @@ public class Graph {
         return false;
     }
 
+    public void sendDataPackets() {
+
+    }
+
+    public void forwardPacket(IPacket data) {
+        int currentIndex = indexMap.get(data.getPosition());
+
+    }
+
+//    public void sendDataPackets(IPacket data.txt) {
+//        Path path = data.txt.getSource()
+//                .getPaths()
+//                .get(indexMap.get(data.txt.getPosition())).get(0);
+//        data.txt.setPath(path);
+//        while (!data.txt.getPosition().equals(data.txt.getDestination())) {
+//            int currentIndex = indexMap.get(data.txt.getPosition());
+//            int nextIndex = data.txt.getPath().getNextIndex();
+//            Edge toBeTraversed = matrix[currentIndex][nextIndex];
+//            if (toBeTraversed == null){
+//                System.err.println("Invalid path!! Edge not found!!");
+//                return;
+//            }
+//
+//
+//        }
+//    }
+
     // TODO refactor for path and test functionality
-    public void sendDataPackets(IPacket data) {
-//        Node nextJump = data.getPath().pop();
-//        int fromIndex = indexMap.get(data.getPosition().getId());
+//    public void sendDataPackets(IPacket data.txt) {
+//        Node nextJump = data.txt.getPath().pop();
+//        int fromIndex = indexMap.get(data.txt.getPosition().getId());
 //        int toIndex = indexMap.get(nextJump.getId());
 //        Edge line = matrix[fromIndex][toIndex];
-//        line.setLoadForNextStep(data);
+//        line.setLoadForNextStep(data.txt);
 //        if (!line.canFail()) {
 //            System.out.println("Line is not too loaded, packet can get through");
-//            data.setPosition(nextJump);
-//            if (data.getPosition().equals(data.getDestination()))
+//            data.txt.setPosition(nextJump);
+//            if (data.txt.getPosition().equals(data.txt.getDestination()))
 //                System.out.println("Data is in its destination!");
 //        } else {
 //            System.out.println("Line is too loaded. Aborting... ");
 //        }
-    }
+//    }
 
 }

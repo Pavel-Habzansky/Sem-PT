@@ -1,9 +1,9 @@
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Stack;
 
 public class Main {
 
@@ -70,17 +70,38 @@ public class Main {
         return matrix;
     }
 
+    public static HashMap<Integer, Data> loadData(String source) {
+        HashMap<Integer, Data> dataHashMap = new HashMap<>();
+        try(BufferedReader reader = new BufferedReader(new FileReader(source))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] split = line.split(" ");
+                int timeStep = Integer.parseInt(split[0]);
+                Node sourceNode = new Node(split[1]);
+                Node destinationNode = new Node(split[2]);
+                double dataSize = Double.parseDouble(split[3]);
+                Data loadedData = new Data(dataSize, sourceNode, destinationNode);
+                dataHashMap.put(timeStep, loadedData);
+            }
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return dataHashMap;
+    }
+
     public static void main(String[] args) {
         ArrayList<Edge> edges = loadEdges("hrany.txt");
         HashMap<Node, Integer> indexMap = generateIndexMap(edges);
         Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
 
-        Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
-        graph.initPaths();
-        graph.printMatrix();
+        HashMap<Integer, Data> dataHashMap = loadData("data.txt");
+        for (Data data : dataHashMap.values())
+            System.out.println(data);
 
-        for (int i = 0; i < graph.getSize(); i++)
-            graph.getNodeFromKey(i).printPathsToOthers();
+        Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
+        graph.setDataRequests(dataHashMap);
+
+
 
 
 

@@ -84,4 +84,9 @@ public class Node {
         return id.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return "Node "+id;
+    }
+
 }

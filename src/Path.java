@@ -1,14 +1,31 @@
 import java.util.LinkedList;
 
+/**
+ * @author Jakub Mikeš
+ */
+
 public class Path {
 
-    public LinkedList<Integer> path;
-    public Double sum;
-
+    private LinkedList<Integer> path;
+    private Double sum;
+    private int currentIndexInPath;
 
     public Path(LinkedList<Integer> path, double sum) {
         this.path = path;
         this.sum = sum;
+        this.currentIndexInPath = path.get(0);
+    }
+
+    public int getNextIndex() {
+        return currentIndexInPath+1;
+    }
+
+    public void moveToNext() {
+        currentIndexInPath++;
+    }
+
+    public int getCurrentIndexInPath() {
+        return currentIndexInPath;
     }
 
     public void printPath() {

@@ -18,6 +18,11 @@ public class DataPart implements IPacket {
         // TODO implement path
     }
 
+    @Override
+    public void setPath(Path path) {
+        this.path = path;
+    }
+
     public Data getParent() {
         return parent;
     }
