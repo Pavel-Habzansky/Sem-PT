@@ -4,9 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Stack;
-
+/**
+ * Main class
+ * @author Habzansky, Mikes
+ *
+ */
 public class Main {
 
+	/**
+	 * the method loadEdges load data from file
+	 * @param filename
+	 * @return edges
+	 */
     public static ArrayList<Edge> loadEdges(String filename) {
         ArrayList<Edge> edges = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
@@ -25,6 +34,11 @@ public class Main {
         return edges;
     }
 
+    /**
+     * the method generateIndexMap return indexMap
+     * @param edges
+     * @return indexMap
+     */
     public static HashMap<Node, Integer> generateIndexMap(ArrayList<Edge> edges) {
         HashMap<Node, Integer> indexMap = new HashMap<>();
         int mapKeyIndexing = 0;
@@ -42,7 +56,12 @@ public class Main {
         }
         return indexMap;
     }
-
+/**
+ * the method generateMatrix generate new matrix
+ * @param indexMap
+ * @param edges
+ * @return matrix
+ */
     public static Edge[][] generateMatrix(HashMap<Node, Integer> indexMap,
                                           ArrayList<Edge> edges) {
         Edge[][] matrix = new Edge[indexMap.size()][indexMap.size()];
