@@ -1,77 +1,143 @@
-
-import java.util.ArrayList;
+import java.util.*;
 
 /**
- * Created by PavelHabzansky on 11.10.17.
+ * Node class
+ * @author Habzansky, Mikes
+ *
  */
 public class Node {
-
-    // TODO implement VISITED / UNVISITED state Enum type for Dijkstra
-
+/**
+ * attributes of Node class
+ */
     private String id;
     private SmartStack smartStack;
-    //    private ArrayList<Node> predecessors;
-//    private ArrayList<Node> successors;
-    private ArrayList<Edge> neighborhood;
-    private ArrayList<Data> data;
+    private boolean visited;
+    private ArrayList<Node> neighbors;
+    private HashMap<Integer, ArrayList<Path>> paths;
 
+    /**
+     * constructor of Node class
+     * @param id
+     */
     public Node(String id) {
         this.id = id;
-        this.neighborhood = new ArrayList<>();
-//        this.predecessors = new ArrayList<>();
-//        this.successors = new ArrayList<>();
         this.smartStack = new SmartStack();
+        this.visited = false;
+        this.neighbors = new ArrayList<>();
+        this.paths = new HashMap<>();
     }
 
-    public SmartStack getSmartStack() {
-        return smartStack;
+    /**
+     * the method sortPaths sort paths using the key
+     * @param key
+     */
+    private void sortPaths(int key) {
+        Collections.sort(
+                paths.get(key),
+                Comparator.comparing(Path::getSum)
+                        .reversed()
+        );
+
     }
 
+    /**
+     * the method printPathToOthers print other paths
+     */
+    public void printPathsToOthers() {
+        System.out.println("All paths from "+id);
+        for (Integer key : paths.keySet()) {
+            for (int i = 0; i < paths.size(); i++) {
+                paths.get(key).get(i).printPath();
+            }
+        }
+        System.out.println("================");
+    }
+
+    /**
+     * the method addPath add new path
+     * @param destination
+     * @param path
+     */
+    public void addPath(int destination, Path path) {
+        if (!this.paths.containsKey(destination))
+            this.paths.put(destination, new ArrayList<>());
+        this.paths.get(destination).add(path);
+        sortPaths(destination);
+    }
+
+    /**
+     * the method getNeighbors return neighbors of node
+     * @return neighbors
+     */
+    public ArrayList<Node> getNeighbors() {
+        return neighbors;
+    }
+
+    /**
+     * the method setPaths set new path
+     * @param paths
+     */
+    public void setPaths(HashMap<Integer, ArrayList<Path>> paths) {
+        this.paths = paths;
+    }
+
+    /**
+     * the method getPaths return path 
+     * @return
+     */
+    public HashMap<Integer, ArrayList<Path>> getPaths() {
+        return paths;
+    }
+
+    /**
+     * the method getSmartStackLoad return stacked data
+     * @return
+     */
+    public double getSmartStackLoad() {
+        return this.smartStack.getStackedData();
+    }
+
+    /**
+     * the method geVisited find out if node was visited
+     * @return visited
+     */
+    public boolean getVisited() {
+        return visited;
+    }
+
+    /**
+     * the method setVisited attribute visited
+     * @param visited
+     */
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    /**
+     * the method getIde return id of node
+     * @return
+     */
     public String getId() {
-        return this.id;
+        return id;
     }
 
-    public void addNeighbour(Edge edge) {
-        if (containsNeighbor(edge))
-            return;
-        this.neighborhood.add(edge);
-    }
-
-    public ArrayList<Edge> getNeighborhood() {
-        return this.neighborhood;
-    }
-
-    public boolean containsNeighbor(Edge edge) {
-        return this.neighborhood.contains(edge);
-    }
-
-    public Edge getNeighbor(int index) {
-        return this.neighborhood.get(index);
-    }
-
-    public int neighborCount() {
-        return this.neighborhood.size();
-    }
-
-    public int hashCode() {
-        return this.id.hashCode();
-    }
-
-    public boolean equals(Object other) {
-        if (!(other instanceof Node))
-            return false;
-
-        Node v = (Node) other;
-        return this.id.equals(v.id);
-    }
-
-    public ArrayList<Data> getData() {
-        return data;
-    }
-
+    /**
+     * the method equals compare nodes
+     * @return true or false
+     */
     @Override
-    public String toString() {
-        return "Uzel " + id;
+    public boolean equals(Object object) {
+        Node other = (Node) object;
+        return this.id.equals(other.getId());
+    }
+
+    /**
+     * the method hashCode return hash code if of node
+     * @return hash code of id
+     */
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
 }

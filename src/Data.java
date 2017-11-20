@@ -1,33 +1,62 @@
-/**
- * Created by Jakub Mikeš on 29.10.17.
- */
-public class Data {
 
-    private double dataSize;
+import java.util.Stack;
+
+/**
+ * Created by Jakub Mikeš on 14.11.17.
+ */
+public class Data implements IPacket {
+
+    private double size;
+    private Node position;
     private Node source;
     private Node destination;
-    private Node[] cesta;
+    private Path path;
 
-    public Data(double dataSize, Node source, Node destination) {
-        this.dataSize = dataSize;
+    public Data(double size, Node source, Node destination) {
+        this.size = size;
         this.source = source;
+        this.position = source;
         this.destination = destination;
     }
 
-    public double getDataSize() {
-        return this.dataSize;
+
+
+    public void setPath(Path newPath) {
+        this.path = newPath;
     }
 
-    public Node getDestination() {
-        return this.destination;
+    public void setSize(double newSize) {
+        this.size = newSize;
     }
 
+    @Override
+    public void setPosition(Node newPosition) {
+        this.position = newPosition;
+    }
+
+    @Override
+    public Path getPath() {
+        return path;
+    }
+
+    @Override
+    public double getSize() {
+        return size;
+    }
+
+    @Override
     public Node getSource() {
-        return this.source;
+        return source;
+    }
+    @Override
+    public Node getDestination() {
+        return destination;
+    }
+    @Override
+    public Node getPosition() {
+        return position;
     }
 
-    public Node[] getCesta() {
-        return this.cesta;
-    }
+
 
 }

@@ -1,35 +1,61 @@
 import java.util.LinkedList;
-
+/**
+ * Path class
+ * @author Habzansky, Mikes
+ *
+ */
 public class Path {
+/**
+ * attributes of Path class
+ */
+    public LinkedList<Integer> path;
+    public Double sum;
 
-public LinkedList<Edge> path;
-public double sum;
+    /**
+     * constructor of Path class  
+     * 
+     * @param path
+     * @param sum
+ */
+    public Path(LinkedList<Integer> path, double sum) {
+        this.path = path;
+        this.sum = sum;
+    }
 
+    
+    /**
+     * the method printPath() print path and sum  
+     * 
+     */
+    public void printPath() {
+        System.out.println("Path from "+path.get(0)+" to "+path.get(path.size()-1));
+        for (Integer index : path)
+            System.out.print(index + " ");
+        System.out.println("\nSum of bandwidths: "+sum);
+    }
 
-public Path(LinkedList<Edge> path){
-	this.path = path;
-		makeSum();
-}
+  /**
+   * the method getPath() return path 
+   * @return path
+   */
+    public LinkedList<Integer> getPath() {
+        return path;
+    }
 
-public void makeSum(){
-	double sum=0;
-	
-	for(int i=0; i<path.size();i++){
-		sum +=(double) path.get(i).getBandwidth(); 
-	}
-	this.sum=sum;
-}
+    
+ /** 
+ * the method setPath set path  
+ * @param path
+ */
+    public void setPath(LinkedList<Integer> path) {
+        this.path = path;
+    }
 
-public LinkedList<Edge> getPath(){
-	return path;
-}
-
-public void setPath(LinkedList<Edge> path){
-	this.path= path;
-	makeSum();
-}
-
-public double getSum(){
-	return sum;
-	}
+/**
+ * the method getSum return sum 
+ * @return sum
+ */
+    public Double getSum() {
+        return sum;
+    }
 }
