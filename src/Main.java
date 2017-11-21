@@ -95,14 +95,18 @@ public class Main {
         Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
 
         HashMap<Integer, Data> dataHashMap = loadData("data.txt");
-        for (Data data : dataHashMap.values())
-            System.out.println(data);
+//        for (Data data : dataHashMap.values())
+//            System.out.println(data);
 
         Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
+        graph.initPaths();
         graph.setDataRequests(dataHashMap);
+//        graph.getNodeFromKey(1).printPathsToOthers();
+//        System.out.println(graph.getNodeFromKey(1).getPaths().get(0));
+//        graph.getNodeFromKey(1).printPathsToOthers();
 
-
-
+        graph.forwardPacket();
+//        graph.forwardPacket(new Data(300, new Node("id1"), new Node("id2")));
 
 
     }

@@ -6,30 +6,71 @@ import java.util.LinkedList;
 
 /**
  * Created by PavelHabzansky on 13.11.17.
+ *
+ * @author PavelHabzansky
+ *         <p>
+ *         Graph class created as Singleton.
+ *         This class is representation of graph using adjacency matrix of Edges
+ * @see Edge
  */
+
 public class Graph {
 
+    /**
+     * Instance of this class
+     */
     private static Graph INSTANCE;
 
+    /**
+     * Matrix representation of Graph
+     */
     private Edge[][] matrix;
+    /**
+     * Map of indices.
+     * Each Node (key) has its index in matrix stored in this map as value
+     */
     private HashMap<Node, Integer> indexMap;
+    /**
+     * Map of data requests where Data is stored as value and index of destination as key
+     */
     private HashMap<Integer, Data> dataRequests;
 
+    /**
+     * Private constructor of this Graph, returns instance of this class
+     *
+     * @param indexMap Map of indices for matrix
+     * @param matrix   Adjacency matrix of Edges
+     */
     private Graph(HashMap<Node, Integer> indexMap, Edge[][] matrix) {
         this.indexMap = indexMap;
         this.matrix = matrix;
     }
 
+    /**
+     * Returns instance of this Graph
+     *
+     * @param indexMap Map of indices for matrix
+     * @param matrix   Adjacency matrix of Edges
+     * @return Instance of this Graph
+     */
     public static Graph getInstance(HashMap<Node, Integer> indexMap, Edge[][] matrix) {
         if (INSTANCE == null)
             INSTANCE = new Graph(indexMap, matrix);
         return INSTANCE;
     }
 
+    /**
+     * Sets data requests for this Graph
+     *
+     * @param dataRequests Map of data requests where keys are indices of destination Nodes and values are Data packets
+     */
     public void setDataRequests(HashMap<Integer, Data> dataRequests) {
         this.dataRequests = dataRequests;
     }
 
+    /**
+     * Prints all Edges in this matrix
+     */
     public void printMatrix() {
         for (int i = 0; i < matrix.length; i++) {
             System.out.print("[ ");
@@ -43,6 +84,12 @@ public class Graph {
         }
     }
 
+    /**
+     * Returns Node from index map base on key input
+     *
+     * @param key Value of Node's index
+     * @return Node mapped to index in adjacency matrix
+     */
     public Node getNodeFromKey(int key) {
         for (Node o : indexMap.keySet()) {
             if (indexMap.get(o).equals(key)) {
@@ -52,12 +99,23 @@ public class Graph {
         return null;
     }
 
+    /**
+     * Prints ids of path's Nodes
+     *
+     * @param path Path to be printed
+     */
+    @Deprecated
     public void printPath(ArrayList<Node> path) {
         for (int i = 0; i < path.size(); i++)
             System.out.print(path.get(i).getId());
         System.out.println();
     }
 
+    /**
+     * Creates Paths for all Nodes
+     *
+     * @see Path
+     */
     public void initPaths() {
         for (int i = 0; i < matrix[0].length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
@@ -68,11 +126,23 @@ public class Graph {
         }
     }
 
+    /**
+     * Returns size of this Graph's adjacency matrix
+     *
+     * @return Size of adjacency matrix
+     */
     public int getSize() {
         return matrix[0].length;
     }
 
-
+    /**
+     * Depth-First-Search algorithm recursively finds all possible Paths from source to destination
+     *
+     * @param source      Index of source Node
+     * @param destination Index of destination Node
+     * @param visited     List of visited Nodes
+     * @param sourceFinal Immutable index of source Node
+     */
     public void dfs(int source, int destination, ArrayList<Integer> visited, final int sourceFinal) {
         int current;
         visited.add(source);
@@ -104,54 +174,42 @@ public class Graph {
         visited.remove(new Integer(source));
     }
 
-    public boolean edgeExists(String nodeId1, String nodeId2) {
-        if (matrix[indexMap.get(new Node(nodeId1))][indexMap.get(new Node(nodeId2))] != null)
-            return true;
-        return false;
+    /**
+     * Identifies if Edge between two Nodes exists
+     *
+     * @param nodeIndex1 Id of first Node
+     * @param nodeIndex2 Id of second Node
+     * @return True of edge between 2 Nodes exists
+     */
+    public boolean edgeExists(int nodeIndex1, int nodeIndex2) {
+        return (matrix[nodeIndex1][nodeIndex2] != null);
+//        if (matrix[indexMap.get(new Node(nodeId1))][indexMap.get(new Node(nodeId2))] != null)
+//            return true;
+//        return false;
     }
 
+    /**
+     * Method manipulating sending Data requests
+     */
     public void sendDataPackets() {
 
     }
 
-    public void forwardPacket(IPacket data) {
+    /**
+     * Method forwarding packet from one Node to another
+     */
+    public void forwardPacket() {
+        Data data = new Data(300, getNodeFromKey(0), getNodeFromKey(3));
+        data.setPath(data.getPosition()
+                .getPathsTo(indexMap.get(data.getDestination()))
+                .get(0)
+        );
+
         int currentIndex = indexMap.get(data.getPosition());
+        int nextIndex = data.getPath().getNextIndex();
+        Edge edge = matrix[currentIndex][nextIndex];
+        System.out.println(edge);
 
     }
-
-//    public void sendDataPackets(IPacket data.txt) {
-//        Path path = data.txt.getSource()
-//                .getPaths()
-//                .get(indexMap.get(data.txt.getPosition())).get(0);
-//        data.txt.setPath(path);
-//        while (!data.txt.getPosition().equals(data.txt.getDestination())) {
-//            int currentIndex = indexMap.get(data.txt.getPosition());
-//            int nextIndex = data.txt.getPath().getNextIndex();
-//            Edge toBeTraversed = matrix[currentIndex][nextIndex];
-//            if (toBeTraversed == null){
-//                System.err.println("Invalid path!! Edge not found!!");
-//                return;
-//            }
-//
-//
-//        }
-//    }
-
-    // TODO refactor for path and test functionality
-//    public void sendDataPackets(IPacket data.txt) {
-//        Node nextJump = data.txt.getPath().pop();
-//        int fromIndex = indexMap.get(data.txt.getPosition().getId());
-//        int toIndex = indexMap.get(nextJump.getId());
-//        Edge line = matrix[fromIndex][toIndex];
-//        line.setLoadForNextStep(data.txt);
-//        if (!line.canFail()) {
-//            System.out.println("Line is not too loaded, packet can get through");
-//            data.txt.setPosition(nextJump);
-//            if (data.txt.getPosition().equals(data.txt.getDestination()))
-//                System.out.println("Data is in its destination!");
-//        } else {
-//            System.out.println("Line is too loaded. Aborting... ");
-//        }
-//    }
 
 }
