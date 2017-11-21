@@ -70,8 +70,9 @@ public class Main {
         return matrix;
     }
 
-    public static HashMap<Integer, Data> loadData(String source, Graph graph) {
-        HashMap<Integer, Data> dataHashMap = new HashMap<>();
+    public static ArrayList<IPacket> loadData(String source, Graph graph) {
+//        HashMap<Integer, Data> dataHashMap = new HashMap<>();
+        ArrayList<IPacket> dataRequests = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader(source))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -83,13 +84,15 @@ public class Main {
 //                Node sourceNode = new Node(split[1]);
 //                Node destinationNode = new Node(split[2]);
                 double dataSize = Double.parseDouble(split[3]);
-                Data loadedData = new Data(dataSize, sourceNode, destinationNode);
-                dataHashMap.put(timeStep, loadedData);
+                Data loadedData = new Data(dataSize, sourceNode, destinationNode, timeStep);
+                dataRequests.add(loadedData);
+//                dataHashMap.put(timeStep, loadedData);
             }
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
-        return dataHashMap;
+//        System.out.println(dataRequests.size());
+        return dataRequests;
     }
 
     public static void main(String[] args) {
@@ -99,13 +102,13 @@ public class Main {
 
         Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
         graph.printMatrix();
-        HashMap<Integer, Data> dataHashMap = loadData("data.txt", graph);
+        ArrayList<IPacket> dataRequests = loadData("datatest.txt", graph);
 //        for (Data data : dataHashMap.values())
 //            System.out.println(data);
 
 
         graph.initPaths();
-        graph.setDataRequests(dataHashMap);
+        graph.setDataRequests(dataRequests);
 //        graph.getNodeFromKey(1).printPathsToOthers();
 //        System.out.println(graph.getNodeFromKey(1).getPaths().get(0));
 //        graph.getNodeFromKey(1).printPathsToOthers();

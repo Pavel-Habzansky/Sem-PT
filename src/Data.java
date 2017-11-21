@@ -3,13 +3,15 @@
 
 /**
  * @author Jakub Mikeš
- *
- * Data class representing data packet
+ *         <p>
+ *         Data class representing data packet
  * @see IPacket
  * @see Node
  * @see Path
  */
 public class Data implements IPacket {
+
+    private int timeStep;
 
     /**
      * Size of data packet
@@ -34,27 +36,37 @@ public class Data implements IPacket {
 
     /**
      * Constructor of Data class, returns instance of thiss class
-     * @param size Size of this Data packet
-     * @param source Source Node of this Data packet
+     *
+     * @param size        Size of this Data packet
+     * @param source      Source Node of this Data packet
      * @param destination Destination Node of this Data packet
      */
-    public Data(double size, Node source, Node destination) {
+    public Data(double size, Node source, Node destination, int timestep) {
+        this.timeStep = timestep;
         this.size = size;
         this.source = source;
         this.position = source;
         this.destination = destination;
     }
 
+    @Override
+    public int getTimestep() {
+        return timeStep;
+    }
+
     /**
      * Returns size of this Data packet
+     *
      * @param newSize Size of this data packet
      */
+    @Override
     public void setSize(double newSize) {
         this.size = newSize;
     }
 
     /**
      * Sets new position for this Data packet
+     *
      * @param newPosition New postition for this Data packet
      */
     @Override
@@ -64,6 +76,7 @@ public class Data implements IPacket {
 
     /**
      * Sets new Path for this Data packet
+     *
      * @param newPath New Path for data packet
      */
     @Override
@@ -73,6 +86,7 @@ public class Data implements IPacket {
 
     /**
      * Returns Path of this Data packet
+     *
      * @return Path of this Data packet
      */
     @Override
@@ -82,6 +96,7 @@ public class Data implements IPacket {
 
     /**
      * Returns size of this Data packet
+     *
      * @return Size of Data packet
      */
     @Override
@@ -91,6 +106,7 @@ public class Data implements IPacket {
 
     /**
      * Returns source Node of data packet
+     *
      * @return Source Node of data packet
      */
     @Override
@@ -100,6 +116,7 @@ public class Data implements IPacket {
 
     /**
      * Returns destination Node of data packet
+     *
      * @return Destination Node of data packet
      */
     @Override
@@ -109,6 +126,7 @@ public class Data implements IPacket {
 
     /**
      * Returns current position of data packet
+     *
      * @return Current position of data packet
      */
     @Override
@@ -118,13 +136,13 @@ public class Data implements IPacket {
 
     /**
      * Returns String representation of data packet
+     *
      * @return String representation of data packet
      */
     @Override
     public String toString() {
-        return "Data packet: \nSource: "+source+"\nDestination: "+destination+"\nCurrently on: "+position;
+        return "Data packet: \nSource: " + source + "\nDestination: " + destination + "\nCurrently on: " + position+"\nSize: "+size;
     }
-
 
 
 }

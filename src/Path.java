@@ -31,7 +31,7 @@ public class Path {
     public Path(LinkedList<Integer> path, double sum) {
         this.path = path;
         this.sum = sum;
-        this.currentIndexInPath = path.get(0);
+        this.currentIndexInPath = 0;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Path {
      * @return Next index int path
      */
     public int getNextIndex() {
-        return currentIndexInPath + 1;
+        return path.get(currentIndexInPath+1);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Path {
      * @return Current index in path
      */
     public int getCurrentIndexInPath() {
-        return currentIndexInPath;
+        return path.get(currentIndexInPath);
     }
 
     /**

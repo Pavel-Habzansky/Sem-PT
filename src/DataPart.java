@@ -12,6 +12,7 @@ import java.util.Stack;
  */
 public class DataPart implements IPacket {
 
+    private int timestep;
     /**
      * Size of this Data segment
      */
@@ -19,7 +20,7 @@ public class DataPart implements IPacket {
     /**
      * Data packet to which this DataPart belong
      */
-    private Data parent;
+    private IPacket parent;
     /**
      * Current position of this DataPart represented by Node
      */
@@ -36,10 +37,20 @@ public class DataPart implements IPacket {
      * @param parent   Data packet to which this DataPart belong
      * @param position Current position of this Node
      */
-    public DataPart(double size, Data parent, Node position) {
+    public DataPart(double size, IPacket parent, Node position, int timestep) {
         this.size = size;
         this.parent = parent;
         this.position = position;
+        this.timestep = timestep;
+    }
+
+    public void setTimestep(int timestep) {
+        this.timestep = timestep;
+    }
+
+    @Override
+    public int getTimestep() {
+        return timestep;
     }
 
     /**
@@ -57,7 +68,7 @@ public class DataPart implements IPacket {
      *
      * @return Data packet to which this data segment belong
      */
-    public Data getParent() {
+    public IPacket getParent() {
         return parent;
     }
 
@@ -119,6 +130,11 @@ public class DataPart implements IPacket {
     @Override
     public void setPosition(Node newPosition) {
         this.position = newPosition;
+    }
+
+    @Override
+    public void setSize(double newSize) {
+        this.size = newSize;
     }
 
 }
