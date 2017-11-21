@@ -122,7 +122,7 @@ public class Data implements IPacket {
      */
     @Override
     public String toString() {
-        return "Data packet: \nSource: "+source+"\nDestination: "+destination;
+        return "Data packet: \nSource: "+source+"\nDestination: "+destination+"\nCurrently on: "+position;
     }
 
 

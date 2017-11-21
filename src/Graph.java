@@ -1,8 +1,6 @@
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * Created by PavelHabzansky on 13.11.17.
@@ -174,6 +172,10 @@ public class Graph {
         visited.remove(new Integer(source));
     }
 
+    public Node getNodeById(String id) {
+        return getNodeFromKey(indexMap.get(new Node(id)));
+    }
+
     /**
      * Identifies if Edge between two Nodes exists
      *
@@ -183,15 +185,41 @@ public class Graph {
      */
     public boolean edgeExists(int nodeIndex1, int nodeIndex2) {
         return (matrix[nodeIndex1][nodeIndex2] != null);
-//        if (matrix[indexMap.get(new Node(nodeId1))][indexMap.get(new Node(nodeId2))] != null)
-//            return true;
-//        return false;
     }
 
     /**
      * Method manipulating sending Data requests
      */
     public void sendDataPackets() {
+        int minTimeStep = Collections.min(dataRequests.keySet());
+        int maxKeyStep = Collections.max(dataRequests.keySet());
+//        System.out.println("min: "+minTimeStep);
+//        System.out.println("max: "+maxKeyStep);
+
+        Data data = dataRequests.get(minTimeStep);
+        System.out.println(data.getPosition());
+        data.setPath(
+                data.getPosition()
+                        .getPathsTo(indexMap.get(data.getDestination()))
+                        .get(0)
+        );
+        int currentIndex = indexMap.get(data.getPosition());
+        int nextIndex = data.getPath().getNextIndex();
+        Edge edge = matrix[currentIndex][nextIndex];
+        System.out.println(edge);
+        // zjist jestli hrana selze
+        // pokud ano, spocitej, jestli selze po rozdeleni packetu na dve polovicni casti
+        // pokud ano, najdi celkove jinou cestu
+        // pokud hrana na zacatku neselze, posli packet
+        // pokud hrana neselze po rozdeleni, rozdel, forwarduj jednu polovinu, druhou zarad do requestu a dej do smart stacku na current node
+//        for (int i = minTimeStep; i < maxKeyStep; i++) {
+//            Data data;
+//            if ((data = dataRequests.get(i)) != null) {
+//                int currentIndex = indexMap.get(data.getPosition());
+//                int nextIndex = data.getPath().getNextIndex();
+//                Edge edge = matrix[currentIndex][nextIndex];
+//            }
+//        }
 
     }
 
@@ -199,7 +227,9 @@ public class Graph {
      * Method forwarding packet from one Node to another
      */
     public void forwardPacket() {
+        // When this method is called, we already know, this edge will not fail
         Data data = new Data(300, getNodeFromKey(0), getNodeFromKey(3));
+        System.out.println(data);
         data.setPath(data.getPosition()
                 .getPathsTo(indexMap.get(data.getDestination()))
                 .get(0)
@@ -209,6 +239,8 @@ public class Graph {
         int nextIndex = data.getPath().getNextIndex();
         Edge edge = matrix[currentIndex][nextIndex];
         System.out.println(edge);
+        data.setPosition(edge.getNode2());
+        System.out.println(data);
 
     }
 

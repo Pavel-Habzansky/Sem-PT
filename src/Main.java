@@ -70,15 +70,18 @@ public class Main {
         return matrix;
     }
 
-    public static HashMap<Integer, Data> loadData(String source) {
+    public static HashMap<Integer, Data> loadData(String source, Graph graph) {
         HashMap<Integer, Data> dataHashMap = new HashMap<>();
         try(BufferedReader reader = new BufferedReader(new FileReader(source))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] split = line.split(" ");
                 int timeStep = Integer.parseInt(split[0]);
-                Node sourceNode = new Node(split[1]);
-                Node destinationNode = new Node(split[2]);
+
+                Node sourceNode = graph.getNodeById(split[1]);
+                Node destinationNode = graph.getNodeById(split[2]);
+//                Node sourceNode = new Node(split[1]);
+//                Node destinationNode = new Node(split[2]);
                 double dataSize = Double.parseDouble(split[3]);
                 Data loadedData = new Data(dataSize, sourceNode, destinationNode);
                 dataHashMap.put(timeStep, loadedData);
@@ -94,18 +97,21 @@ public class Main {
         HashMap<Node, Integer> indexMap = generateIndexMap(edges);
         Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
 
-        HashMap<Integer, Data> dataHashMap = loadData("data.txt");
+        Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
+        graph.printMatrix();
+        HashMap<Integer, Data> dataHashMap = loadData("data.txt", graph);
 //        for (Data data : dataHashMap.values())
 //            System.out.println(data);
 
-        Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
+
         graph.initPaths();
         graph.setDataRequests(dataHashMap);
 //        graph.getNodeFromKey(1).printPathsToOthers();
 //        System.out.println(graph.getNodeFromKey(1).getPaths().get(0));
 //        graph.getNodeFromKey(1).printPathsToOthers();
 
-        graph.forwardPacket();
+        graph.sendDataPackets();
+//        graph.forwardPacket();
 //        graph.forwardPacket(new Data(300, new Node("id1"), new Node("id2")));
 
 
