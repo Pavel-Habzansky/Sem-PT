@@ -16,14 +16,6 @@ public class Node {
      */
     private SmartStack smartStack;
     /**
-     * Property identifying if Node has been visited
-     */
-    private boolean visited;
-    /**
-     * List of neighboring Nodes
-     */
-    private ArrayList<Node> neighbors;
-    /**
      * Map of paths to target where Integer key is index of Node in matrix
      *
      * @see Graph
@@ -38,8 +30,6 @@ public class Node {
     public Node(String id) {
         this.id = id;
         this.smartStack = new SmartStack();
-        this.visited = false;
-        this.neighbors = new ArrayList<>();
         this.paths = new HashMap<>();
     }
 
@@ -96,15 +86,6 @@ public class Node {
     }
 
     /**
-     * Method returns List of neighboring Nodes
-     *
-     * @return List of neighboring Nodes
-     */
-    public ArrayList<Node> getNeighbors() {
-        return neighbors;
-    }
-
-    /**
      * Method sets paths for this Node
      *
      * @param paths Paths to be set
@@ -130,24 +111,6 @@ public class Node {
      */
     public double getSmartStackLoad() {
         return this.smartStack.getStackedData();
-    }
-
-    /**
-     * Returns if this Node has been visited
-     *
-     * @return True/false
-     */
-    public boolean getVisited() {
-        return visited;
-    }
-
-    /**
-     * Sets visited parameter
-     *
-     * @param visited True/false state
-     */
-    public void setVisited(boolean visited) {
-        this.visited = visited;
     }
 
     /**

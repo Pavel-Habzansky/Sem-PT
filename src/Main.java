@@ -55,8 +55,8 @@ public class Main {
                     edge.getBandwidth(),
                     edge.getErrorChance());
 
-            edge.getNode1().getNeighbors().add(edge.getNode2());
-            edge.getNode2().getNeighbors().add(edge.getNode1());
+//            edge.getNode1().getNeighbors().add(edge.getNode2());
+//            edge.getNode2().getNeighbors().add(edge.getNode1());
 
             Node node1 = edge.getNode1();
             Node node2 = edge.getNode2();
