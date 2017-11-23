@@ -11,7 +11,7 @@
  */
 public class Data implements IPacket {
 
-    private int timeStep;
+    private final int timeStep;
 
     /**
      * Size of data packet
@@ -40,6 +40,7 @@ public class Data implements IPacket {
      * @param size        Size of this Data packet
      * @param source      Source Node of this Data packet
      * @param destination Destination Node of this Data packet
+     * @param timestep    Time step at which this Data packet is supposed to be sent
      */
     public Data(double size, Node source, Node destination, int timestep) {
         this.timeStep = timestep;
@@ -49,6 +50,30 @@ public class Data implements IPacket {
         this.destination = destination;
     }
 
+    /**
+     * Sets new source Node for Data packet
+     *
+     * @param newSource New source Node
+     * @see Node
+     */
+    public void setSource(Node newSource) {
+        this.source = newSource;
+    }
+
+    /**
+     * Sets new destination Node for Data packet
+     *
+     * @param destination New destination Node
+     */
+    public void setDestination(Node destination) {
+        this.destination = destination;
+    }
+
+    /**
+     * Returns time step at which this Data packet is to be forwarded
+     *
+     * @return Time step at which this Data packet is to be forwarded
+     */
     @Override
     public int getTimestep() {
         return timeStep;
@@ -141,7 +166,7 @@ public class Data implements IPacket {
      */
     @Override
     public String toString() {
-        return "Data packet: \nSource: " + source + "\nDestination: " + destination + "\nCurrently on: " + position+"\nSize: "+size;
+        return "Data packet: \nSource: " + source + "\nDestination: " + destination + "\nCurrently on: " + position + "\nSize: " + size;
     }
 
 

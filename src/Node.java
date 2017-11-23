@@ -20,18 +20,37 @@ public class Node {
      *
      * @see Graph
      */
-    private HashMap<Integer, ArrayList<Path>> paths;
+    private Map<Integer, List<Path>> paths;
 
     /**
      * Constructor of Node class returning instance of this object
      *
-     * @param id
+     * @param id Id of Node
      */
     public Node(String id) {
         this.id = id;
         this.smartStack = new SmartStack();
         this.paths = new HashMap<>();
     }
+
+    /**
+     * Sets new id for Node
+     *
+     * @param id New id for Node
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets SmartStack for Node
+     *
+     * @param smartStack New SmartStack
+     */
+    public void setSmartStack(SmartStack smartStack) {
+        this.smartStack = smartStack;
+    }
+
 
     /**
      * Method sorts paths of this Node descending using Comparator.comparing() method
@@ -55,7 +74,7 @@ public class Node {
      * @return List of paths to Node
      * @see Graph
      */
-    public ArrayList<Path> getPathsTo(int index) {
+    public List<Path> getPathsTo(int index) {
         return paths.get(index);
     }
 
@@ -79,8 +98,9 @@ public class Node {
      * @param path        Path to be added
      */
     public void addPath(int destination, Path path) {
-        if (!this.paths.containsKey(destination))
+        if (!this.paths.containsKey(destination)) {
             this.paths.put(destination, new ArrayList<>());
+        }
         this.paths.get(destination).add(path);
         sortPaths(destination);
     }
@@ -90,7 +110,7 @@ public class Node {
      *
      * @param paths Paths to be set
      */
-    public void setPaths(HashMap<Integer, ArrayList<Path>> paths) {
+    public void setPaths(Map<Integer, List<Path>> paths) {
         this.paths = paths;
     }
 
@@ -99,7 +119,7 @@ public class Node {
      *
      * @return All Paths as a Map
      */
-    public HashMap<Integer, ArrayList<Path>> getPaths() {
+    public Map<Integer, List<Path>> getPaths() {
         return paths;
     }
 

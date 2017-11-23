@@ -1,7 +1,7 @@
 /**
  * @author Habzansky, Mikes
- *
- * SmartStack class used to store Data on Node
+ *         <p>
+ *         SmartStack class used to store Data on Node
  */
 public class SmartStack {
 
@@ -11,6 +11,7 @@ public class SmartStack {
     private final double SIZE = 100;
     /**
      * Array of DataParts stored in this SmartStack
+     *
      * @see DataPart
      */
     private DataPart[] stackedData = new DataPart[5];
@@ -34,8 +35,9 @@ public class SmartStack {
      */
     public double getStackedData() {
         double dataSum = 0;
-        for (DataPart data : stackedData)
+        for (DataPart data : stackedData) {
             dataSum += data.getSize();
+        }
         return dataSum;
     }
 
@@ -81,6 +83,17 @@ public class SmartStack {
             increaseSize();
             System.out.println("Size increased to: " + stackedData.length);
         }
+        if (getStackedData() > SIZE) {
+            System.out.println("Stack Overflow!");
+            for (int i = 0; i < stackedData.length; i++) {
+                DataPart dataPart = stackedData[i];
+                IPacket parent = dataPart.getParent();
+                parent.setSize(parent.getSize() + dataPart.getSize());
+                parent.setPosition(parent.getSource());
+                stackedData[i] = null;
+            }
+            return;
+        }
         stackedData[topElementIndex] = data;
         topElementIndex++;
     }
@@ -91,9 +104,7 @@ public class SmartStack {
      * @return True if SmartStack is full
      */
     public boolean isStackFull() {
-        if (stackedData[stackedData.length - 1] != null)
-            return true;
-        return false;
+        return (stackedData[stackedData.length - 1] != null);
     }
 
     /**
@@ -110,8 +121,9 @@ public class SmartStack {
      */
     public void printStack() {
         for (int i = 0; i < stackedData.length; i++) {
-            if (stackedData[i] == null)
+            if (stackedData[i] == null) {
                 return;
+            }
             System.out.println("Data: " + stackedData[i].getSize());
         }
     }

@@ -10,6 +10,7 @@ import java.util.*;
  *         Graph class created as Singleton.
  *         This class is representation of graph using adjacency matrix of Edges
  * @see Edge
+ * @see Node
  */
 
 public class Graph {
@@ -17,21 +18,22 @@ public class Graph {
     /**
      * Instance of this class
      */
-    private static Graph INSTANCE;
+    private static Graph instance;
 
     /**
      * Matrix representation of Graph
+     * Indices mapping Nodes to columns/rows to this matrix are stored in indexMap
      */
     private Edge[][] matrix;
     /**
      * Map of indices.
      * Each Node (key) has its index in matrix stored in this map as value
      */
-    private HashMap<Node, Integer> indexMap;
+    private Map<Node, Integer> indexMap;
     /**
      * Map of data requests where Data is stored as value and index of destination as key
      */
-    private ArrayList<IPacket> dataRequests;
+    private List<IPacket> dataRequests;
 
     /**
      * Private constructor of this Graph, returns instance of this class
@@ -39,9 +41,27 @@ public class Graph {
      * @param indexMap Map of indices for matrix
      * @param matrix   Adjacency matrix of Edges
      */
-    private Graph(HashMap<Node, Integer> indexMap, Edge[][] matrix) {
-        this.indexMap = indexMap;
+    private Graph(Map<Node, Integer> indexMap, Edge[][] matrix) {
+        setIndexMap(indexMap);
+        setMatrix(matrix);
+    }
+
+    /**
+     * Sets matrix for this Graph
+     *
+     * @param matrix Adjacency matrix graph representation
+     */
+    public void setMatrix(Edge[][] matrix) {
         this.matrix = matrix;
+    }
+
+    /**
+     * Sets index map for this Graph
+     *
+     * @param indexMap Index map with Nodes as keys and their indices for adjacency matrix
+     */
+    public void setIndexMap(Map<Node, Integer> indexMap) {
+        this.indexMap = indexMap;
     }
 
     /**
@@ -51,10 +71,11 @@ public class Graph {
      * @param matrix   Adjacency matrix of Edges
      * @return Instance of this Graph
      */
-    public static Graph getInstance(HashMap<Node, Integer> indexMap, Edge[][] matrix) {
-        if (INSTANCE == null)
-            INSTANCE = new Graph(indexMap, matrix);
-        return INSTANCE;
+    public static Graph getInstance(Map<Node, Integer> indexMap, Edge[][] matrix) {
+        if (instance == null) {
+            instance = new Graph(indexMap, matrix);
+        }
+        return instance;
     }
 
     /**
@@ -62,7 +83,7 @@ public class Graph {
      *
      * @param dataRequests Map of data requests where keys are indices of destination Nodes and values are Data packets
      */
-    public void setDataRequests(ArrayList<IPacket> dataRequests) {
+    public void setDataRequests(List<IPacket> dataRequests) {
         this.dataRequests = dataRequests;
     }
 
@@ -73,10 +94,11 @@ public class Graph {
         for (int i = 0; i < matrix.length; i++) {
             System.out.print("[ ");
             for (int j = 0; j < matrix[0].length; j++) {
-                if (matrix[i][j] != null)
+                if (matrix[i][j] != null) {
                     System.out.print(matrix[i][j].getBandwidth() + " ");
-                else
+                } else {
                     System.out.print("null ");
+                }
             }
             System.out.println("]");
         }
@@ -103,9 +125,10 @@ public class Graph {
      * @param path Path to be printed
      */
     @Deprecated
-    public void printPath(ArrayList<Node> path) {
-        for (int i = 0; i < path.size(); i++)
+    public void printPath(List<Node> path) {
+        for (int i = 0; i < path.size(); i++) {
             System.out.print(path.get(i).getId());
+        }
         System.out.println();
     }
 
@@ -117,11 +140,13 @@ public class Graph {
     public void initPaths() {
         for (int i = 0; i < matrix[0].length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                if (i == j)
+                if (i == j) {
                     continue;
+                }
                 dfs(i, j, new ArrayList<>(), i);
             }
         }
+        System.out.println();
     }
 
     /**
@@ -141,7 +166,7 @@ public class Graph {
      * @param visited     List of visited Nodes
      * @param sourceFinal Immutable index of source Node
      */
-    public void dfs(int source, int destination, ArrayList<Integer> visited, final int sourceFinal) {
+    public void dfs(int source, int destination, List<Integer> visited, final int sourceFinal) {
         int current;
         visited.add(source);
         for (int i = 0; i < matrix[0].length; i++) {
@@ -155,8 +180,9 @@ public class Graph {
                     }
 
                     LinkedList<Integer> indexPath = new LinkedList<>();
-                    for (Integer node : visited)
-                        indexPath.add(node);
+                    for (Integer nodeIndex : visited) {
+                        indexPath.add(nodeIndex);
+                    }
                     Path path = new Path(indexPath, sumBandwidth);
                     Node sourceNode = getNodeFromKey(sourceFinal);
                     sourceNode.addPath(destination, path);
@@ -172,6 +198,12 @@ public class Graph {
         visited.remove(new Integer(source));
     }
 
+    /**
+     * Returns Node from index map based on its id
+     *
+     * @param id Id of searched Node
+     * @return Node from index map keys
+     */
     public Node getNodeById(String id) {
         return getNodeFromKey(indexMap.get(new Node(id)));
     }
@@ -188,49 +220,35 @@ public class Graph {
     }
 
     /**
+     * Resets loads on all Edges
+     */
+    public void resetLoads() {
+        for (int j = 0; j < matrix[0].length; j++) {
+            for (int k = 0; k < matrix[0].length; k++) {
+                if (matrix[j][k] != null) {
+                    matrix[j][k].resetLoad();
+                }
+            }
+        }
+    }
+
+    /**
      * Method manipulating sending Data requests
      */
     public void sendDataPackets() {
 
-        // pseudokod...
-        /**
-         * list <ipacket> packety = new list;
-         *  //pruchod pres timesteps
-         * for (int i = 0; i < dataReq.size; i++) {
-         *    // pokud data na pozici j ma timestep == i, pridej ho do packetu
-         *      for(in j = 0; j < dataReq.size; j++) {
-         *          if(dataReq.get(j).getTimestep == i)
-         *              packety.add(dataReq.get(j));
-         *      }
-         *
-         *      // vsechno co je v seznamu packetu forwarduj o krok dal
-         *      for(int j = 0; j < packety.size; j++) {
-         *          spocitat load na hrane
-         *          .
-         *          .
-         *          .
-         *          .
-         *          forwardPacket(packety.get(j));
-         *      }
-         *
-         * }
-         */
-
-
         ArrayList<IPacket> packets = new ArrayList<>();
-        System.out.println("start");
-//        System.out.println(dataRequests.size());
-//        for (int i = 0; i < dataRequests.size(); i++)
-        for (int i = 0; !dataRequests.isEmpty(); i++){
-//            System.out.println(dataRequests.get(i));
 
-            System.out.println("outer for");
+        for (int i = 0; !dataRequests.isEmpty(); i++) {
+
             for (int j = 0; j < dataRequests.size(); j++) {
                 if (dataRequests.get(j).getTimestep() == i) {
-                    packets.add(dataRequests.get(j));
-//                    dataRequests.remove(j);
-                    System.out.println("SIZE "+dataRequests.size());
+
+                    IPacket forwarding = dataRequests.get(j);
+                    packets.add(forwarding);
+//                    dataRequests.remove(forwarding);
                 }
+
             }
 
             for (int j = 0; j < packets.size(); j++) {
@@ -238,46 +256,16 @@ public class Graph {
                 // dividing into DataParts
                 // add DataParts into packets List
 
-                System.out.println("Packet acquired");
                 IPacket packet = packets.get(j);
-                System.out.println(packet);
-                System.out.println("=======");
+
                 if (packet.getPath() == null) {
-                    System.out.println("Path is null");
-                    Node positionNode = packet.getPosition();
-                    Node destinationNode = packet.getDestination();
-                    LinkedList<Integer> destinationPath = positionNode
-                            .getPathsTo(indexMap.get(destinationNode))
-                            .get(0)
-                            .getPath();
-                    double sum = positionNode
-                            .getPathsTo(indexMap.get(destinationNode))
-                            .get(0)
-                            .getSum();
-                    LinkedList<Integer> linkedPath = new LinkedList<>(destinationPath);
-                    Path path = new Path(linkedPath, sum);
-                    packet.setPath(path);
+                    setPathForPacket(packet);
                 }
-//                Node positionNode = packet.getPosition();
-//                Node destinationNode = packet.getDestination();
-//                LinkedList<Integer> destinationPath = positionNode
-//                        .getPathsTo(indexMap.get(destinationNode))
-//                        .get(0)
-//                        .getPath();
-//                double sum = positionNode
-//                        .getPathsTo(indexMap.get(destinationNode))
-//                        .get(0)
-//                        .getSum();
-//                LinkedList<Integer> linkedPath = new LinkedList<>(destinationPath);
-//                Path path = new Path(linkedPath, sum);
-//                packet.setPath(path);
 
-                int currentNode = indexMap.get(packet.getPosition());
-//                System.out.println(packet.getPath());
-                int nextNode = packet.getPath().getNextIndex();
+                int currentNode = packet.getPath().getCurrentNodeIndexInPath();
+                int nextNode = packet.getPath().getNextNodeIndex();
 
-                System.out.println("CURRENT NODE "+currentNode);
-                System.out.println("NEXT NODE "+nextNode);
+
                 Edge nextEdge = matrix[currentNode][nextNode];
                 Edge nextEdgeSymetric = matrix[nextNode][currentNode];
 
@@ -287,136 +275,132 @@ public class Graph {
                     nextEdgeSymetric.setLoadForNextStep(packet.getSize());
 
                 } else if (!nextEdge.canFail(packet.getSize() / 2)) {
-                    // hrana neselze po rozdeleni dat na dve casti
-                    DataPart dataPart = new DataPart(
-                            packet.getSize() / 2,
-                            packet,
-                            packet.getPosition(),
-                            packet.getTimestep() + 1);
-                    packet.setSize(
-                            packet.getSize() / 2
-                    );
-//                    System.out.println("DEBUG "+dataPart.getPosition().getPathsTo(indexMap.get(dataPart.getDestination())));
-//                    System.out.println("DEBUG position "+dataPart.getPosition());
-//                    System.out.println("DEBUG destination "+dataPart.getDestination());
-//                    System.out.println(dataPart.getPosition().equals(dataPart.getDestination()));
-                    // set path !! copy it !!
-                    System.out.println(dataPart.getPath());
-//                    LinkedList<Integer> currentPath = dataPart.getPath().getPath();
 
-                    LinkedList<Integer> parentPath = packet.getPath().getPath();
-                    LinkedList<Integer> pathForSegment = new LinkedList<>(parentPath);
-
-
-//                    Collections.copy(pathForSegment, parentPath);
-                    dataPart.setPath(new Path(pathForSegment, packet.getPath().getSum()));
-
-//                    dataPart.setPath(dataPart.getPosition()
-//                            .getPathsTo(indexMap.get(dataPart.getDestination()))
-//                            .get(0));
-                    dataRequests.add(dataPart);
+                    segmentData(packet, i);
 
                 } else {
                     // hrana i tak selze, dej packetu jinou cestu
                     // !!! dej mu kopii, ne primo referenci !!!
-                    String destinationId = packet.getDestination().getId();
-                    Node destinationNode = getNodeById(destinationId);
-                    int destinationIndex = indexMap.get(destinationNode);
 
-                    LinkedList<Integer> currentPath = packet.getPath().getPath();
-                    Node position = packet.getPosition();
-                    LinkedList<Integer> alternativePath = position.getPathsTo(destinationIndex).get(1).getPath();
-                    Collections.copy(currentPath, alternativePath);
-
-//                    Path alternative = packet.getPosition().getPathsTo(destinationIndex).get(1);
-//                    packet.setPath(alternative);
-
+                    changePath(packet);
                 }
 
             }
 
             for (int j = 0; j < packets.size(); j++) {
-//                System.out.println("Forwarding packet: " + packets.get(j));
                 // forwarding
-                forwardPacket(packets.get(j));
+
+                IPacket forwardingPacket = packets.get(j);
+                forwardPacket(forwardingPacket, packets);
+
+                if (forwardingPacket.getDestination().equals(forwardingPacket.getPosition())) {
+                    dataRequests.remove(forwardingPacket);
+//                    packets.remove(forwardingPacket);
+                } else {
+                    forwardingPacket.getPath().moveToNext();
+                }
+
             }
 
-            // reset loads on edges before next step
-            for (int j = 0; j < matrix[0].length; j++) {
-                for (int k = 0; k < matrix[0].length; k++) {
-                    if (matrix[j][k] != null) matrix[j][k].resetLoad();
-                }
-            }
+            resetLoads();
 
         }
-
-//        int minTimeStep = Collections.min(dataRequests.keySet());
-//        int maxKeyStep = Collections.max(dataRequests.keySet());
-//        System.out.println("min: "+minTimeStep);
-//        System.out.println("max: "+maxKeyStep);
-
-//        Data data = dataRequests.get(minTimeStep);
-//        System.out.println(data.getPosition());
-//        data.setPath(
-//                data.getPosition()
-//                        .getPathsTo(indexMap.get(data.getDestination()))
-//                        .get(0)
-//        );
-//        int currentIndex = indexMap.get(data.getPosition());
-//        int nextIndex = data.getPath().getNextIndex();
-//        Edge edge = matrix[currentIndex][nextIndex];
-//        System.out.println(edge);
-        // zjist jestli hrana selze
-        // pokud ano, spocitej, jestli selze po rozdeleni packetu na dve polovicni casti
-        // pokud ano, najdi celkove jinou cestu
-        // pokud hrana na zacatku neselze, posli packet
-        // pokud hrana neselze po rozdeleni, rozdel, forwarduj jednu polovinu, druhou zarad do requestu a dej do smart stacku na current node
-//        for (int i = minTimeStep; i < maxKeyStep; i++) {
-//            Data data;
-//            if ((data = dataRequests.get(i)) != null) {
-//                int currentIndex = indexMap.get(data.getPosition());
-//                int nextIndex = data.getPath().getNextIndex();
-//                Edge edge = matrix[currentIndex][nextIndex];
-//            }
-//        }
 
     }
 
     /**
-     * Method forwarding packet from one Node to another
+     * Sets new path for packet before forwarding
+     *
+     * @param packet Packet currently being sent
+     * @see IPacket
      */
-    public void forwardPacket(IPacket packet) {
+    public void setPathForPacket(IPacket packet) {
+        Node positionNode = packet.getPosition();
+        Node destinationNode = packet.getDestination();
+        List<Integer> destinationPath = positionNode
+                .getPathsTo(indexMap.get(destinationNode))
+                .get(0)
+                .getPath();
+        double sum = positionNode
+                .getPathsTo(indexMap.get(destinationNode))
+                .get(0)
+                .getSum();
+        List<Integer> linkedPath = new LinkedList<>(destinationPath);
+        Path path = new Path(linkedPath, sum);
+        packet.setPath(path);
+    }
+
+    /**
+     * Divides data packet in half creating DataPart and adding it to data requests for next timestep
+     *
+     * @param packet   Data packet to be segmented
+     * @param lastStep Current timestep, data segment is given current timestep + 1
+     * @see IPacket
+     */
+    public void segmentData(IPacket packet, int lastStep) {
+        DataPart dataPart = new DataPart(
+                packet.getSize() / 2,
+                packet,
+                packet.getPosition(),
+                lastStep + 1);
+        packet.setSize(
+                packet.getSize() / 2
+        );
+
+        System.out.println(dataPart);
+        int destinationIndex = indexMap.get(dataPart.getDestination());
+
+        Node position = packet.getPosition();
+        if (position.getPathsTo(destinationIndex) == null) {
+            System.out.println();
+        }
+        List<Integer> alternativePath = position.getPathsTo(destinationIndex).get(1).getPath();
+        List<Integer> currentPath = new LinkedList<>(alternativePath);
+
+        dataPart.setPath(new Path(currentPath, packet.getPath().getSum()));
+    }
+
+    /**
+     * Changes Path for currently forwarded packet
+     *
+     * @param packet Packet whose path is to be changed
+     * @see Path
+     * @see IPacket
+     */
+    public void changePath(IPacket packet) {
+        String destinationId = packet.getDestination().getId();
+        Node destinationNode = getNodeById(destinationId);
+        int destinationIndex = indexMap.get(destinationNode);
+
+        List<Integer> currentPath = packet.getPath().getPath();
+        Node position = packet.getPosition();
+        List<Integer> alternativePath = position.getPathsTo(destinationIndex).get(1).getPath();
+        Collections.copy(currentPath, alternativePath);
+    }
+
+    /**
+     * Method forwarding packet from one Node to another
+     *
+     * @param packet  Packet to be forwarded in current step
+     * @param packets List of packets containing currently forwarded packet
+     */
+    public void forwardPacket(IPacket packet, List<IPacket> packets) {
         // When this method is called, we already know, this edge will not fail
-        int currentIndex = indexMap.get(packet.getPosition());
-        int nextIndex = packet.getPath().getNextIndex();
+
+        int currentIndex = packet.getPath().getCurrentNodeIndexInPath();
+        int nextIndex = packet.getPath().getNextNodeIndex();
         Edge traversingEdge = matrix[currentIndex][nextIndex];
         packet.setPosition(traversingEdge.getNode2());
+        if (packet.getPosition().getPaths().isEmpty()) {
+            System.out.println();
+        }
         // check if packet is in destination
-        System.out.println(packet);
-        System.out.println("=====");
-//        System.out.println("CHecking in forwarding");
-//        System.out.println("Position in forwarding "+packet.getPosition());
-//        System.out.println("Destination in forwarding "+packet.getDestination());
         if (packet.getDestination().equals(packet.getPosition())) {
             System.out.println("Packet: " + packet + " is successfully forwarded to its destination!");
-            dataRequests.remove(packet);
+//            dataRequests.remove(packet);
+            packets.remove(packet);
         }
-        packet.getPath().moveToNext();
 
-
-//        Data data = new Data(300, getNodeFromKey(0), getNodeFromKey(3));
-//        System.out.println(data);
-//        data.setPath(data.getPosition()
-//                .getPathsTo(indexMap.get(data.getDestination()))
-//                .get(0)
-//        );
-//
-//        int currentIndex = indexMap.get(data.getPosition());
-//        int nextIndex = data.getPath().getNextIndex();
-//        Edge edge = matrix[currentIndex][nextIndex];
-//        System.out.println(edge);
-//        data.setPosition(edge.getNode2());
-//        System.out.println(data);
 
     }
 

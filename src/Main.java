@@ -4,28 +4,76 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
 
-    public static ArrayList<Edge> loadEdges(String filename) {
+    /**
+     * Returns Node from List of Nodes if it contains that Node
+     *
+     * @param nodes List of Nodes
+     * @param node  Node being searched for
+     * @return Node from List of Nodes
+     * @see Node
+     */
+    private static Node getNode(List<Node> nodes, Node node) {
+        for (int i = 0; i < nodes.size(); i++) {
+            if (nodes.get(i).getId().equals(node.getId())) {
+                return nodes.get(i);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Reads specific file with Edges and returns List of those Edges
+     *
+     * @param filename File name of source file
+     * @return List of Edges
+     * @see Edge
+     */
+    public static List<Edge> loadEdges(String filename) {
         ArrayList<Edge> edges = new ArrayList<>();
+        ArrayList<Node> nodes = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] split = line.split(" ");
                 Node node1 = new Node(split[0]);
+                if (!nodes.contains(node1)) {
+                    // uzel v seznamu neni, pridej ho
+                    nodes.add(node1);
+                } else {
+                    // uzel v seznamu je, vyber ho z nej  prirad ho node1
+                    node1 = getNode(nodes, node1);
+                }
                 Node node2 = new Node(split[1]);
+                if (!nodes.contains(node2)) {
+                    nodes.add(node2);
+                } else {
+                    node2 = getNode(nodes, node2);
+                }
                 double bandwidth = Double.parseDouble(split[2]);
                 double errorChance = Double.parseDouble(split[3]);
                 edges.add(new Edge(node1, node2, bandwidth, errorChance));
+
             }
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
+
         return edges;
     }
 
-    public static HashMap<Node, Integer> generateIndexMap(ArrayList<Edge> edges) {
+    /**
+     * Generated Map of indices for adjacency matrix
+     *
+     * @param edges List of Edges
+     * @return Map with Nodes as keys and indices as values
+     * @see Edge
+     */
+    public static Map<Node, Integer> generateIndexMap(List<Edge> edges) {
         HashMap<Node, Integer> indexMap = new HashMap<>();
         int mapKeyIndexing = 0;
         for (int i = 0; i < edges.size(); i++) {
@@ -43,8 +91,18 @@ public class Main {
         return indexMap;
     }
 
-    public static Edge[][] generateMatrix(HashMap<Node, Integer> indexMap,
-                                          ArrayList<Edge> edges) {
+    /**
+     * Generater adjacency matrix of edges from Nodes and their indices in index map
+     * and List of Edge
+     *
+     * @param indexMap Map with Nodes as keys and indices as values
+     * @param edges    List of edges for matrix
+     * @return Adjacency matrix
+     * @see Edge
+     * @see Node
+     */
+    public static Edge[][] generateMatrix(Map<Node, Integer> indexMap,
+                                          List<Edge> edges) {
         Edge[][] matrix = new Edge[indexMap.size()][indexMap.size()];
 
         for (int i = 0; i < edges.size(); i++) {
@@ -54,9 +112,6 @@ public class Main {
                     edge.getNode1(),
                     edge.getBandwidth(),
                     edge.getErrorChance());
-
-//            edge.getNode1().getNeighbors().add(edge.getNode2());
-//            edge.getNode2().getNeighbors().add(edge.getNode1());
 
             Node node1 = edge.getNode1();
             Node node2 = edge.getNode2();
@@ -70,10 +125,15 @@ public class Main {
         return matrix;
     }
 
-    public static ArrayList<IPacket> loadData(String source, Graph graph) {
-//        HashMap<Integer, Data> dataHashMap = new HashMap<>();
+    /**
+     * Loads data packets into data requests List
+     *
+     * @param source Source file with data requests
+     * @param graph  Graph which is to be loaded with data
+     */
+    public static void loadData(String source, Graph graph) {
         ArrayList<IPacket> dataRequests = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader(source))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] split = line.split(" ");
@@ -81,41 +141,28 @@ public class Main {
 
                 Node sourceNode = graph.getNodeById(split[1]);
                 Node destinationNode = graph.getNodeById(split[2]);
-//                Node sourceNode = new Node(split[1]);
-//                Node destinationNode = new Node(split[2]);
                 double dataSize = Double.parseDouble(split[3]);
                 Data loadedData = new Data(dataSize, sourceNode, destinationNode, timeStep);
                 dataRequests.add(loadedData);
-//                dataHashMap.put(timeStep, loadedData);
             }
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
-//        System.out.println(dataRequests.size());
-        return dataRequests;
+        graph.setDataRequests(dataRequests);
     }
 
     public static void main(String[] args) {
-        ArrayList<Edge> edges = loadEdges("hrany.txt");
-        HashMap<Node, Integer> indexMap = generateIndexMap(edges);
+        List<Edge> edges = loadEdges("hrany.txt");
+        Map<Node, Integer> indexMap = generateIndexMap(edges);
         Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
 
         Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
         graph.printMatrix();
-        ArrayList<IPacket> dataRequests = loadData("datatest.txt", graph);
-//        for (Data data : dataHashMap.values())
-//            System.out.println(data);
-
+        loadData("data.txt", graph);
 
         graph.initPaths();
-        graph.setDataRequests(dataRequests);
-//        graph.getNodeFromKey(1).printPathsToOthers();
-//        System.out.println(graph.getNodeFromKey(1).getPaths().get(0));
-//        graph.getNodeFromKey(1).printPathsToOthers();
 
         graph.sendDataPackets();
-//        graph.forwardPacket();
-//        graph.forwardPacket(new Data(300, new Node("id1"), new Node("id2")));
 
 
     }

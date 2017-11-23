@@ -62,12 +62,14 @@ public interface IPacket {
 
     /**
      * Returns timestep at which packet is supposed to be forwarded
+     *
      * @return Timestep value
      */
     int getTimestep();
 
     /**
      * Sets new size for packet
+     *
      * @param newSize New size for data packet
      */
     void setSize(double newSize);

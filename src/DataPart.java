@@ -1,5 +1,4 @@
 
-import java.util.Stack;
 
 /**
  * @author PavelHabzansky
@@ -31,19 +30,58 @@ public class DataPart implements IPacket {
     private Path path;
 
     /**
+     * Property identifying if DataPart is currently stored in SmartStack
+     */
+    private boolean isInSmartStack;
+
+    /**
      * Constructor of DataPart class, returns instance of this class
      *
      * @param size     Size of this data segment
      * @param parent   Data packet to which this DataPart belong
      * @param position Current position of this Node
+     * @param timestep Time step at which this DataPart should be sent
      */
     public DataPart(double size, IPacket parent, Node position, int timestep) {
         this.size = size;
         this.parent = parent;
         this.position = position;
         this.timestep = timestep;
+        this.isInSmartStack = true;
     }
 
+    /**
+     * Sets new parent for this DataPart
+     *
+     * @param parent New parental packet
+     * @see IPacket
+     */
+    public void setParent(IPacket parent) {
+        this.parent = parent;
+    }
+
+    /**
+     * Identifies if DataPart is currently in SmartStack
+     *
+     * @return True if DataPart is in SmartStack
+     * @see SmartStack
+     */
+    public boolean getIsInSmartStack() {
+        return isInSmartStack;
+    }
+
+    /**
+     * Sets positioning in SmartStack as false
+     */
+    public void leaveSmartStack() {
+        isInSmartStack = false;
+    }
+
+    /**
+     * Sets new time step at which this DataPart is to be forwarded
+     *
+     * @param timestep New time step
+     */
     public void setTimestep(int timestep) {
         this.timestep = timestep;
     }
@@ -109,7 +147,7 @@ public class DataPart implements IPacket {
      */
     @Override
     public Node getDestination() {
-        return getParent().getPosition();
+        return getParent().getDestination();
     }
 
     /**
@@ -132,9 +170,24 @@ public class DataPart implements IPacket {
         this.position = newPosition;
     }
 
+    /**
+     * Sets new size of data for this packet
+     *
+     * @param newSize New size for data packet
+     */
     @Override
     public void setSize(double newSize) {
         this.size = newSize;
+    }
+
+    /**
+     * String representation of DataPart
+     *
+     * @return String representation of this class
+     */
+    @Override
+    public String toString() {
+        return "DataPart: \nSize: " + size + "\nPosition: " + position + "\nDestination: " + parent.getDestination();
     }
 
 }

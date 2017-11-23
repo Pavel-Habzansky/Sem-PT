@@ -45,6 +45,42 @@ public class Edge {
     }
 
     /**
+     * Sets Node for node1
+     *
+     * @param node New Node for node1
+     */
+    public void setNode1(Node node) {
+        this.node1 = node;
+    }
+
+    /**
+     * Sets Node for node2
+     *
+     * @param node New Node for node2
+     */
+    public void setNode2(Node node) {
+        this.node2 = node;
+    }
+
+    /**
+     * Sets new bandwidth
+     *
+     * @param bandwidth New bandwidth
+     */
+    public void setBandwidth(double bandwidth) {
+        this.bandwidth = bandwidth;
+    }
+
+    /**
+     * Sets new error chance
+     *
+     * @param errorChance New error chance
+     */
+    public void setErrorChance(double errorChance) {
+        this.errorChance = errorChance;
+    }
+
+    /**
      * Identifies if this Edge can fail under load of input data size
      *
      * @param dataSize Load of data
