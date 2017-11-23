@@ -1,4 +1,8 @@
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author PavelHabzansky
@@ -11,6 +15,9 @@
  */
 public class DataPart implements IPacket {
 
+    /**
+     * Time step at which this DataPart packet is to be sent
+     */
     private int timestep;
     /**
      * Size of this Data segment
@@ -35,6 +42,11 @@ public class DataPart implements IPacket {
     private boolean isInSmartStack;
 
     /**
+     * List of visited Nodes during this DataPart's traversal
+     */
+    private List<Node> visited;
+
+    /**
      * Constructor of DataPart class, returns instance of this class
      *
      * @param size     Size of this data segment
@@ -48,6 +60,45 @@ public class DataPart implements IPacket {
         this.position = position;
         this.timestep = timestep;
         this.isInSmartStack = true;
+        this.visited = new ArrayList<>();
+        visited.add(position);
+    }
+
+    /**
+     * Sets new List of visited Nodes
+     *
+     * @param visited New List of visited Nodes
+     */
+    public void setVisited(List<Node> visited) {
+        this.visited = visited;
+    }
+
+    /**
+     * Resets List of visited Nodes
+     */
+    @Override
+    public void resetVisited() {
+        setVisited(new ArrayList<>());
+    }
+
+    /**
+     * Adds Node to List of visited Nodes
+     *
+     * @param visitedNode New visited Node
+     */
+    @Override
+    public void addVisit(Node visitedNode) {
+        visited.add(visitedNode);
+    }
+
+    /**
+     * Returns List of visited Nodes
+     *
+     * @return List of visited Nodes
+     */
+    @Override
+    public List<Node> getVisited() {
+        return visited;
     }
 
     /**
@@ -86,6 +137,24 @@ public class DataPart implements IPacket {
         this.timestep = timestep;
     }
 
+    /**
+     * Prints information about visited Nodes
+     *
+     * @param filename Name of file which is to be printed in
+     */
+    public void printVisitedToFile(String filename) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true))) {
+            bw.write("Destination reached!\n" + toString() + "\nVisited nodes: " + getVisited() + "\n=================");
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    /**
+     * Returns time step of this DataPart
+     *
+     * @return Time step of this DataPart
+     */
     @Override
     public int getTimestep() {
         return timestep;

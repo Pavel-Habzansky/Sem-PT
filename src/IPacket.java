@@ -1,4 +1,4 @@
-
+import java.util.List;
 
 /**
  * IPacket Interface
@@ -73,6 +73,20 @@ public interface IPacket {
      * @param newSize New size for data packet
      */
     void setSize(double newSize);
+
+    /**
+     * Prints information about graph traversal
+     * @param filename Name of file which is to be printed in
+     */
+    void printVisitedToFile(String filename);
+
+    void addVisit(Node node);
+
+    void resetVisited();
+
+    void setVisited(List<Node> nodes);
+
+    List<Node> getVisited();
 
 
 }

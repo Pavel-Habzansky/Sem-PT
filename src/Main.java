@@ -152,13 +152,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        List<Edge> edges = loadEdges("hrany.txt");
+        if (args.length == 0) {
+            System.out.println("Nebyly zadány žádné vstupní soubory!");
+            return;
+        }
+        List<Edge> edges = loadEdges(args[0]);
         Map<Node, Integer> indexMap = generateIndexMap(edges);
         Edge[][] edgeAdjacencyMatrix = generateMatrix(indexMap, edges);
 
         Graph graph = Graph.getInstance(indexMap, edgeAdjacencyMatrix);
         graph.printMatrix();
-        loadData("data.txt", graph);
+        loadData(args[1], graph);
 
         graph.initPaths();
 

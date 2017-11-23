@@ -16,6 +16,11 @@ import java.util.*;
 public class Graph {
 
     /**
+     * Name of file in which info about graph traversal will be printed
+     */
+    private static final String LOG_FILE_NAME = "log.txt";
+
+    /**
      * Instance of this class
      */
     private static Graph instance;
@@ -391,6 +396,7 @@ public class Graph {
         int nextIndex = packet.getPath().getNextNodeIndex();
         Edge traversingEdge = matrix[currentIndex][nextIndex];
         packet.setPosition(traversingEdge.getNode2());
+        packet.addVisit(traversingEdge.getNode2());
         if (packet.getPosition().getPaths().isEmpty()) {
             System.out.println();
         }
@@ -399,6 +405,7 @@ public class Graph {
             System.out.println("Packet: " + packet + " is successfully forwarded to its destination!");
 //            dataRequests.remove(packet);
             packets.remove(packet);
+            packet.printVisitedToFile(LOG_FILE_NAME);
         }
 
 

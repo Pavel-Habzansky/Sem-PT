@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PT_Semestralka:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PT_Semestralka_jar</output-path>
+    <root id="archive" name="PT_Semestralka.jar">
+      <element id="module-output" name="PT_Semestralka" />
+    </root>
+  </artifact>
+</component>

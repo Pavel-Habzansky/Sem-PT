@@ -1,5 +1,8 @@
-
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Jakub Mikeš
@@ -11,6 +14,14 @@
  */
 public class Data implements IPacket {
 
+    /**
+     * List of visited Nodes during graph traversal
+     */
+    private List<Node> visited;
+
+    /**
+     * Time step at which this Data packet is to be sent
+     */
     private final int timeStep;
 
     /**
@@ -48,6 +59,47 @@ public class Data implements IPacket {
         this.source = source;
         this.position = source;
         this.destination = destination;
+        this.visited = new ArrayList<>();
+        visited.add(source);
+    }
+
+    /**
+     * Sets new List as visited Nodes
+     *
+     * @param newVisited
+     */
+    @Override
+    public void setVisited(List<Node> newVisited) {
+        visited = newVisited;
+    }
+
+    /**
+     * Resets List of visited Nodes
+     */
+    @Override
+    public void resetVisited() {
+        visited = new ArrayList<>();
+        visited.add(source);
+    }
+
+    /**
+     * Returns List of visited Nodes
+     *
+     * @return List of visited Nodes
+     */
+    @Override
+    public List<Node> getVisited() {
+        return this.visited;
+    }
+
+    /**
+     * Adds new Node to List of visited Nodes
+     *
+     * @param node New Node to be added to List of visited Nodes
+     */
+    @Override
+    public void addVisit(Node node) {
+        visited.add(node);
     }
 
     /**
@@ -157,6 +209,20 @@ public class Data implements IPacket {
     @Override
     public Node getPosition() {
         return position;
+    }
+
+    /**
+     * Prints information about visited Nodes
+     *
+     * @param filename Name of file which is to be printed in
+     */
+    @Override
+    public void printVisitedToFile(String filename) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true))) {
+            bw.write("Destination reached!\n" + toString() + "\nVisited nodes: " + getVisited() + "\n=================");
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
     /**
