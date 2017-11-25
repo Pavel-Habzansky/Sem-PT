@@ -15,6 +15,16 @@ import java.util.List;
 public class Data implements IPacket {
 
     /**
+     * In case of changing paths, this data part can fail on edge if it's too loaded
+     */
+    private boolean canFail;
+
+    /**
+     * List of all DataParts derived from this Data packet
+     */
+    private List<DataPart> dataSegments;
+
+    /**
      * List of visited Nodes during graph traversal
      */
     private List<Node> visited;
@@ -22,7 +32,7 @@ public class Data implements IPacket {
     /**
      * Time step at which this Data packet is to be sent
      */
-    private final int timeStep;
+    private int timeStep;
 
     /**
      * Size of data packet
@@ -61,6 +71,64 @@ public class Data implements IPacket {
         this.destination = destination;
         this.visited = new ArrayList<>();
         visited.add(source);
+        this.dataSegments = new ArrayList<>();
+    }
+
+    /**
+     * Sets new time step for this Data packet
+     * @param timestep New time step
+     */
+    @Override
+    public void setTimestep(int timestep) {
+        this.timeStep = timestep;
+    }
+
+    /**
+     * Returns whole Data packet to its source
+     */
+    @Override
+    public void returnHome() {
+        for (DataPart segment : dataSegments) {
+            segment.returnHome();
+        }
+        path = null;
+        position = source;
+    }
+
+    /**
+     * Sets value identifying if Data packet can fail during Edge traversal
+     * @param canFail Value identifying if Packet can fail during Edge traversal
+     */
+    @Override
+    public void setCanFail(boolean canFail) {
+        this.canFail = canFail;
+    }
+
+    /**
+     * Returns value identifying if Data packet can fail during Edge traversal
+     * @return True if Data packet can fail during Edge traversal
+     */
+    @Override
+    public boolean getCanFail() {
+        return canFail;
+    }
+
+    /**
+     * Returns List of all children DataParts
+     * @return List of all children DataParts
+     */
+    @Override
+    public List<DataPart> getSegments() {
+        return dataSegments;
+    }
+
+    /**
+     * Adds new DataPart to this Data packet's segments
+     * @param part DataPart segment
+     */
+    @Override
+    public void addSegment(DataPart part) {
+        dataSegments.add(part);
     }
 
     /**
@@ -232,7 +300,7 @@ public class Data implements IPacket {
      */
     @Override
     public String toString() {
-        return "Data packet: \nSource: " + source + "\nDestination: " + destination + "\nCurrently on: " + position + "\nSize: " + size;
+        return "Data packet: \nSource: " + source + "\nDestination: " + destination + "\nCurrently on: " + position + "\nSize: " + size+"\n";
     }
 
 

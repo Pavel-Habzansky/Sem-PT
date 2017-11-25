@@ -51,6 +51,10 @@ public class Node {
         this.smartStack = smartStack;
     }
 
+    public SmartStack getSmartStack() {
+        return smartStack;
+    }
+
 
     /**
      * Method sorts paths of this Node descending using Comparator.comparing() method

@@ -1,6 +1,7 @@
 
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by PavelHabzansky on 13.11.17.
@@ -242,24 +243,33 @@ public class Graph {
      */
     public void sendDataPackets() {
 
-        ArrayList<IPacket> packets = new ArrayList<>();
+        List<IPacket> packets = new ArrayList<>();
+        List<DataPart> waitingParts = new ArrayList<>();
+
 
         for (int i = 0; !dataRequests.isEmpty(); i++) {
 
             for (int j = 0; j < dataRequests.size(); j++) {
+                int highestTimestep = 0;
+                for (IPacket packet : dataRequests) {
+                    if (packet.getTimestep() > highestTimestep) {
+                        highestTimestep = packet.getTimestep();
+                    }
+                }
+                if (i > highestTimestep) {
+                    i = 0;
+                }
                 if (dataRequests.get(j).getTimestep() == i) {
 
                     IPacket forwarding = dataRequests.get(j);
+
                     packets.add(forwarding);
-//                    dataRequests.remove(forwarding);
+                    dataRequests.remove(forwarding);
                 }
 
             }
 
             for (int j = 0; j < packets.size(); j++) {
-                // set loads for edges
-                // dividing into DataParts
-                // add DataParts into packets List
 
                 IPacket packet = packets.get(j);
 
@@ -279,15 +289,42 @@ public class Graph {
                     nextEdge.setLoadForNextStep(packet.getSize());
                     nextEdgeSymetric.setLoadForNextStep(packet.getSize());
 
+                    if (packet instanceof DataPart) {
+                        if (((DataPart) packet).getIsInSmartStack()) {
+                            ((DataPart) packet).setInSmartStack(false);
+                            packet.getPosition().getSmartStack().pop();
+                        }
+                    }
+
                 } else if (!nextEdge.canFail(packet.getSize() / 2)) {
 
-                    segmentData(packet, i);
+                    segmentData(packet, i, packets);
 
-                } else {
+                } else if (!packet.getCanFail()) {
                     // hrana i tak selze, dej packetu jinou cestu
                     // !!! dej mu kopii, ne primo referenci !!!
 
                     changePath(packet);
+                    nextNode = packet.getPath().getNextNodeIndex();
+                    nextEdge = matrix[currentNode][nextNode];
+                    nextEdgeSymetric = matrix[nextNode][currentNode];
+                    if (nextEdge.getLoadForNextStep(packet.getSize()) > 1) {
+                        System.out.println("Packet\n"+packet+"can not get through because of high load on Edge!!\n==========");
+                        sleep();
+                        packets.remove(packet);
+                        packet.returnHome();
+                        packet.setTimestep(i + 1);
+                        dataRequests.add(packet);
+                        j--;
+                        continue;
+
+                    } else {
+                        nextEdge.setLoadForNextStep(packet.getSize());
+                        nextEdgeSymetric.setLoadForNextStep(packet.getSize());
+                    }
+                } else {
+                    nextEdge.setLoadForNextStep(packet.getSize());
+                    nextEdgeSymetric.setLoadForNextStep(packet.getSize());
                 }
 
             }
@@ -296,21 +333,26 @@ public class Graph {
                 // forwarding
 
                 IPacket forwardingPacket = packets.get(j);
-                forwardPacket(forwardingPacket, packets);
 
-                if (forwardingPacket.getDestination().equals(forwardingPacket.getPosition())) {
-                    dataRequests.remove(forwardingPacket);
-//                    packets.remove(forwardingPacket);
-                } else {
-                    forwardingPacket.getPath().moveToNext();
-                }
+                forwardPacket(forwardingPacket, packets, waitingParts, i);
 
             }
 
+            Iterator<DataPart> iterator = waitingParts.iterator();
+            while (iterator.hasNext()) {
+                DataPart part = iterator.next();
+                System.out.println("DataPart has joined its parent");
+                double parentSize = part.getParent().getSize();
+                double partSize = part.getSize();
+                part.getParent().setSize(parentSize + partSize);
+                iterator.remove();
+                packets.remove(part);
+            }
+//            System.out.println("Packets size: " + packets.size());
+//            System.out.println("Requests size: " + dataRequests.size());
+
             resetLoads();
-
         }
-
     }
 
     /**
@@ -319,6 +361,7 @@ public class Graph {
      * @param packet Packet currently being sent
      * @see IPacket
      */
+
     public void setPathForPacket(IPacket packet) {
         Node positionNode = packet.getPosition();
         Node destinationNode = packet.getDestination();
@@ -342,7 +385,9 @@ public class Graph {
      * @param lastStep Current timestep, data segment is given current timestep + 1
      * @see IPacket
      */
-    public void segmentData(IPacket packet, int lastStep) {
+    public void segmentData(IPacket packet, int lastStep, List<IPacket> packets) {
+        SmartStack smartStack = packet.getPosition().getSmartStack();
+
         DataPart dataPart = new DataPart(
                 packet.getSize() / 2,
                 packet,
@@ -351,18 +396,30 @@ public class Graph {
         packet.setSize(
                 packet.getSize() / 2
         );
+        packet.setSize(dataPart.getSize());
 
-        System.out.println(dataPart);
+        smartStack.push(dataPart);
+
+        if (smartStack.getStackedData() > smartStack.getSize()) {
+            smartStack.fail();
+        }
+
+        if (packet instanceof DataPart) {
+            dataPart.setParent(((DataPart) packet).getParent());
+        }
+
+        // add newly created data part to its parents segments list
+        packet.addSegment(dataPart);
+
         int destinationIndex = indexMap.get(dataPart.getDestination());
 
         Node position = packet.getPosition();
-        if (position.getPathsTo(destinationIndex) == null) {
-            System.out.println();
-        }
+
         List<Integer> alternativePath = position.getPathsTo(destinationIndex).get(1).getPath();
         List<Integer> currentPath = new LinkedList<>(alternativePath);
 
         dataPart.setPath(new Path(currentPath, packet.getPath().getSum()));
+        dataRequests.add(dataPart);
     }
 
     /**
@@ -377,10 +434,18 @@ public class Graph {
         Node destinationNode = getNodeById(destinationId);
         int destinationIndex = indexMap.get(destinationNode);
 
-        List<Integer> currentPath = packet.getPath().getPath();
         Node position = packet.getPosition();
-        List<Integer> alternativePath = position.getPathsTo(destinationIndex).get(1).getPath();
-        Collections.copy(currentPath, alternativePath);
+        if (position.getPathsTo(destinationIndex) == null) {
+            System.out.println(packet);
+        }
+        int numberOfPaths = position.getPathsTo(destinationIndex).size();
+        int random = ThreadLocalRandom.current().nextInt(1, numberOfPaths);
+        List<Integer> alternativePath = position.getPathsTo(destinationIndex).get(random).getPath();
+        List<Integer> newPath = new LinkedList<>(alternativePath);
+        packet.getPath().setPath(newPath);
+        packet.getPath().setCurrentIndexInPath(0);
+
+        packet.setCanFail(true);
     }
 
     /**
@@ -389,26 +454,80 @@ public class Graph {
      * @param packet  Packet to be forwarded in current step
      * @param packets List of packets containing currently forwarded packet
      */
-    public void forwardPacket(IPacket packet, List<IPacket> packets) {
-        // When this method is called, we already know, this edge will not fail
+    public void forwardPacket(IPacket packet, List<IPacket> packets, List<DataPart> waitingParts, int currentTimestep) {
+
+        if (packet.getCanFail()) {
+            boolean failure = new Random().nextBoolean();
+            if (failure) {
+                if (packet instanceof DataPart) {
+                    IPacket parent = ((DataPart) packet).getParent();
+                    parent.returnHome();
+                    parent.setCanFail(false);
+                    parent.setTimestep(currentTimestep + 1);
+                    packets.remove(parent);
+                    packets.removeAll(parent.getSegments());
+                    dataRequests.remove(parent);
+                    dataRequests.add(parent);
+                    System.out.println("Edge failed, data has to be sent again");
+                    return;
+                } else {
+                    packet.returnHome();
+                    packet.setCanFail(false);
+                    packet.setTimestep(currentTimestep + 1);
+                    packets.remove(packet);
+                    packets.removeAll(packet.getSegments());
+                    dataRequests.remove(packet);
+                    dataRequests.add(packet);
+                    return;
+                }
+            }
+        }
+        packet.setCanFail(false);
 
         int currentIndex = packet.getPath().getCurrentNodeIndexInPath();
         int nextIndex = packet.getPath().getNextNodeIndex();
         Edge traversingEdge = matrix[currentIndex][nextIndex];
+
+        if (traversingEdge.getLoad() > 1) {
+            if (packet instanceof DataPart) {
+                ((DataPart) packet).getParent().returnHome();
+                ((DataPart) packet).getParent().setTimestep(currentTimestep + 1);
+                packets.remove(packet);
+                dataRequests.add(packet);
+                return;
+            } else {
+                packet.returnHome();
+                packet.setTimestep(currentTimestep + 1);
+                packets.remove(packet);
+                dataRequests.add(packet);
+                return;
+            }
+
+        }
+
         packet.setPosition(traversingEdge.getNode2());
         packet.addVisit(traversingEdge.getNode2());
-        if (packet.getPosition().getPaths().isEmpty()) {
-            System.out.println();
-        }
+
         // check if packet is in destination
         if (packet.getDestination().equals(packet.getPosition())) {
-            System.out.println("Packet: " + packet + " is successfully forwarded to its destination!");
-//            dataRequests.remove(packet);
+            System.out.println("Packet: \n" + packet + "is successfully forwarded to its destination!\n==========");
+            if (packet instanceof DataPart) {
+                waitingParts.add((DataPart) packet);
+            }
+            dataRequests.remove(packet);
             packets.remove(packet);
             packet.printVisitedToFile(LOG_FILE_NAME);
+        } else {
+            packet.getPath().moveToNext();
         }
+    }
 
-
+    public void sleep() {
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 
 }

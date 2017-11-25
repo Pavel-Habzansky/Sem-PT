@@ -67,6 +67,8 @@ public interface IPacket {
      */
     int getTimestep();
 
+    void setTimestep(int timestep);
+
     /**
      * Sets new size for packet
      *
@@ -80,13 +82,57 @@ public interface IPacket {
      */
     void printVisitedToFile(String filename);
 
+    /**
+     * Adds Node to List of visited Nodes
+     * @param node New visited Node
+     */
     void addVisit(Node node);
 
+    /**
+     * Resets List of visited Nodes
+     */
     void resetVisited();
 
+    /**
+     * Sets new List of visited Nodes
+     * @param nodes New List of visited Nodes
+     */
     void setVisited(List<Node> nodes);
 
+    /**
+     * Returns List of visited Nodes
+     * @return List of visited Nodes
+     */
     List<Node> getVisited();
+
+    /**
+     * Returns List of all children DataPart packets
+     * @return List of all children DataPart packets
+     */
+    List<DataPart> getSegments();
+
+    /**
+     * Adds DataPart segment to children segments
+     * @param part DataPart segment
+     */
+    void addSegment(DataPart part);
+
+    /**
+     * Returns value identifying if this Packet can fail during Edge traversal
+     * @return True of Packet can fail during Edge traversal
+     */
+    boolean getCanFail();
+
+    /**
+     * Sets value identifying if Packet can fail during Edge traversal
+     * @param canFail Value identifying if Packet can fail during Edge traversal
+     */
+    void setCanFail(boolean canFail);
+
+    /**
+     * Returns whole data Packet to its source
+     */
+    void returnHome();
 
 
 }

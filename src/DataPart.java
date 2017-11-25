@@ -16,6 +16,16 @@ import java.util.List;
 public class DataPart implements IPacket {
 
     /**
+     * In case of changing paths, this data part can fail on edge if it's too loaded
+     */
+    private boolean canFail;
+
+    /**
+     * List of all DataParts derived from this Data packet
+     */
+    public List<DataPart> dataSegments;
+
+    /**
      * Time step at which this DataPart packet is to be sent
      */
     private int timestep;
@@ -62,6 +72,59 @@ public class DataPart implements IPacket {
         this.isInSmartStack = true;
         this.visited = new ArrayList<>();
         visited.add(position);
+        this.dataSegments = new ArrayList<>();
+    }
+
+    /**
+     * Returns this DataPart back to its parent
+     */
+    @Override
+    public void returnHome() {
+        for (DataPart segment : dataSegments) {
+            segment.returnHome();
+            segment = null;
+        }
+        IPacket parent = getParent();
+        double parentSize = parent.getSize();
+        parent.setSize(parentSize + getSize());
+        setSize(0);
+        getPath().setCurrentIndexInPath(0);
+    }
+
+    /**
+     * Returns value identifying if this DataPart can fail during Edge traversal
+     * @return True if this DataPart can fail during Edge traversal
+     */
+    @Override
+    public boolean getCanFail() {
+        return canFail;
+    }
+
+    /**
+     * Sets boolean value identifying if this DataPart can fail during Edge traversal
+     * @param canFail True if this DataPart can fail during Edge traversal
+     */
+    @Override
+    public void setCanFail(boolean canFail) {
+        this.canFail = canFail;
+    }
+
+    /**
+     * Returns List of all DataPart children of this DataPart
+     * @return List of all DataPart children
+     */
+    @Override
+    public List<DataPart> getSegments() {
+        return dataSegments;
+    }
+
+    /**
+     * Adds DataPart segment when this segment is divided
+     * @param part New DataPart divided from this one
+     */
+    @Override
+    public void addSegment(DataPart part) {
+        dataSegments.add(part);
     }
 
     /**
@@ -133,6 +196,7 @@ public class DataPart implements IPacket {
      *
      * @param timestep New time step
      */
+    @Override
     public void setTimestep(int timestep) {
         this.timestep = timestep;
     }
@@ -249,6 +313,10 @@ public class DataPart implements IPacket {
         this.size = newSize;
     }
 
+    public void setInSmartStack(boolean value) {
+        this.isInSmartStack = value;
+    }
+
     /**
      * String representation of DataPart
      *
@@ -256,7 +324,7 @@ public class DataPart implements IPacket {
      */
     @Override
     public String toString() {
-        return "DataPart: \nSize: " + size + "\nPosition: " + position + "\nDestination: " + parent.getDestination();
+        return "DataPart: \nSize: " + size + "\nPosition: " + position + "\nDestination: " + parent.getDestination()+"\n";
     }
 
 }

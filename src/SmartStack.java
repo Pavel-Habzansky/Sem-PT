@@ -36,6 +36,9 @@ public class SmartStack {
     public double getStackedData() {
         double dataSum = 0;
         for (DataPart data : stackedData) {
+            if (data == null) {
+                return 0;
+            }
             dataSum += data.getSize();
         }
         return dataSum;
@@ -54,7 +57,7 @@ public class SmartStack {
     /**
      * Dynamically increases size of this SmartStack if its stackedData is full
      */
-    public void increaseSize() {
+    private void increaseSize() {
         DataPart[] increasedStackedData = new DataPart[stackedData.length * 2];
         System.arraycopy(stackedData, 0,
                 increasedStackedData, 0, stackedData.length);
@@ -70,6 +73,18 @@ public class SmartStack {
         DataPart data = stackedData[topElementIndex];
         topElementIndex--;
         return data;
+    }
+
+    /**
+     * Resets the whole SmartStack and sends all data back due to overflow
+     */
+    public void fail() {
+        System.out.println("SmartStack has failed due to stack overflow!");
+        for (int i = 0; i < stackedData.length; i++) {
+            stackedData[i].getParent().returnHome();
+            stackedData[i] = null;
+        }
+        topElementIndex = 0;
     }
 
     /**
@@ -103,7 +118,7 @@ public class SmartStack {
      *
      * @return True if SmartStack is full
      */
-    public boolean isStackFull() {
+    private boolean isStackFull() {
         return (stackedData[stackedData.length - 1] != null);
     }
 

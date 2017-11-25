@@ -35,6 +35,14 @@ public class Path {
     }
 
     /**
+     * Sets current index in path LinkedList
+     * @param index New index in path
+     */
+    public void setCurrentIndexInPath(int index) {
+        this.currentIndexInPath = index;
+    }
+
+    /**
      * Sets new bandwidth sum for this Path
      *
      * @param sum New bandwidth sum

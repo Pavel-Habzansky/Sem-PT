@@ -1,10 +1,91 @@
 Destination reached!
 Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 300.0
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
 Source: Node id5
 Destination: Node id1
 Currently on: Node id1
-Size: 550.0
-Visited nodes: [Node id5, Node id4, Node id1]
+Size: 137.5
+Visited nodes: [Node id5, Node id4, Node id2, Node id3, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 168.75
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 84.375
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 84.375
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
 =================Destination reached!
 Data packet: 
 Source: Node id0
@@ -13,12 +94,60 @@ Currently on: Node id3
 Size: 100.0
 Visited nodes: [Node id0, Node id1, Node id5, Node id4, Node id2, Node id3]
 =================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 100.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
 Data packet: 
 Source: Node id5
 Destination: Node id4
 Currently on: Node id4
 Size: 700.0
-Visited nodes: [Node id5, Node id1, Node id4]
+Visited nodes: [Node id5, Node id1, Node id2, Node id1, Node id1, Node id1, Node id1, Node id2, Node id4]
 =================Destination reached!
 Data packet: 
 Source: Node id4
@@ -29,16 +158,729 @@ Visited nodes: [Node id4, Node id3, Node id2]
 =================Destination reached!
 Data packet: 
 Source: Node id5
-Destination: Node id2
-Currently on: Node id2
-Size: 400.0
-Visited nodes: [Node id5, Node id1, Node id4, Node id3, Node id2]
+Destination: Node id4
+Currently on: Node id4
+Size: 700.0
+Visited nodes: [Node id5, Node id1, Node id2, Node id4]
+=================Destination reached!
+Data packet: 
+Source: Node id0
+Destination: Node id3
+Currently on: Node id3
+Size: 100.0
+Visited nodes: [Node id0, Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 100.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
 =================Destination reached!
 Data packet: 
 Source: Node id3
 Destination: Node id1
 Currently on: Node id1
+Size: 84.375
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 56.25
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
 Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 84.375
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 300.0
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+Data packet: 
+Source: Node id0
+Destination: Node id3
+Currently on: Node id3
+Size: 100.0
+Visited nodes: [Node id0, Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 56.25
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 56.25
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 100.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 137.5
+Visited nodes: [Node id5, Node id4, Node id4, Node id2, Node id3, Node id4, Node id4, Node id4, Node id4, Node id4, Node id2, Node id3, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 300.0
+
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+Data packet: 
+Source: Node id0
+Destination: Node id3
+Currently on: Node id3
+Size: 100.0
+
+Visited nodes: [Node id0, Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 100.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 84.375
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 260.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 84.375
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 56.25
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id4
+Currently on: Node id4
+Size: 700.0
+
+Visited nodes: [Node id5, Node id1, Node id1, Node id2, Node id4]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 300.0
+
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+DataPart: 
+Size: 100.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id0
+Destination: Node id3
+Currently on: Node id3
+Size: 200.0
+
+Visited nodes: [Node id0, Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 70.3125
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 70.3125
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 0.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id4
+Currently on: Node id4
+Size: 700.0
+
+Visited nodes: [Node id5, Node id1, Node id2, Node id4]
+=================Destination reached!
+DataPart: 
+Size: 0.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 0.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 0.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 43.9453125
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id2, Node id4, Node id5, Node id0, Node id2, Node id4, Node id5, Node id0, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 87.890625
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 87.890625
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 87.890625
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 43.9453125
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 87.890625
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 87.890625
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 87.890625
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 87.890625
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 300.0
+
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+Data packet: 
+Source: Node id0
+Destination: Node id3
+Currently on: Node id3
+Size: 100.0
+
+Visited nodes: [Node id0, Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 100.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 225.0
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 137.5
+
+Visited nodes: [Node id5, Node id4, Node id4, Node id2, Node id4, Node id2, Node id4, Node id2, Node id3, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id4
+Currently on: Node id4
+Size: 700.0
+
+Visited nodes: [Node id5, Node id1, Node id1, Node id2, Node id4]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id0
+Destination: Node id3
+Currently on: Node id3
+Size: 100.0
+
+Visited nodes: [Node id0, Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 300.0
+
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+DataPart: 
+Size: 100.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 56.25
+
 Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id1]
 =================Destination reached!
 Data packet: 
@@ -46,5 +888,576 @@ Source: Node id5
 Destination: Node id1
 Currently on: Node id1
 Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 56.25
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 137.5
+
+Visited nodes: [Node id5, Node id4, Node id4, Node id4, Node id4, Node id4, Node id2, Node id4, Node id2, Node id3, Node id4, Node id4, Node id2, Node id3, Node id4, Node id4, Node id4, Node id2, Node id3, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id4
+Currently on: Node id4
+Size: 700.0
+
+Visited nodes: [Node id5, Node id1, Node id1, Node id2, Node id1, Node id2, Node id1, Node id1, Node id1, Node id1, Node id2, Node id1, Node id2, Node id4]
+=================Destination reached!
+DataPart: 
+Size: 68.75
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 300.0
+
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+Data packet: 
+Source: Node id0
+Destination: Node id3
+Currently on: Node id3
+Size: 100.0
+
+Visited nodes: [Node id0, Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 56.25
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id2, Node id3, Node id4, Node id5, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 112.5
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 56.25
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id0, Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 100.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id4
+Currently on: Node id4
+Size: 700.0
+
+Visited nodes: [Node id5, Node id1, Node id2, Node id4]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id5, Node id1, Node id4, Node id2, Node id3]
+=================Destination reached!
+DataPart: 
+Size: 50.0
+Position: Node id3
+Destination: Node id3
+
+Visited nodes: [Node id1, Node id5, Node id4, Node id2, Node id3]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 50000.0
+
+Visited nodes: [Node id4, Node id2]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 260.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id4
+Currently on: Node id4
+Size: 700.0
+
+Visited nodes: [Node id5, Node id1, Node id1, Node id2, Node id1, Node id1, Node id1, Node id2, Node id1, Node id2, Node id1, Node id2, Node id4]
+=================Destination reached!
+DataPart: 
+Size: 0.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 50000.0
+
+Visited nodes: [Node id4, Node id2]
+=================Destination reached!
+DataPart: 
+Size: 0.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 0.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 0.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 260.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 260.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 10000.0
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id0, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 130.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 130.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 200.0
+
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+DataPart: 
+Size: 200.0
+Position: Node id2
+Destination: Node id2
+
+Visited nodes: [Node id4, Node id2]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 70.0
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 70.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 115.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 115.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 200.0
+
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 70.0
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 70.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 115.0
+
+Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 200.0
+Position: Node id2
+Destination: Node id2
+
+Visited nodes: [Node id4, Node id2]
+=================Destination reached!
+DataPart: 
+Size: 115.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id5, Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id4
+Destination: Node id2
+Currently on: Node id2
+Size: 200.0
+
+Visited nodes: [Node id4, Node id3, Node id2]
+=================Destination reached!
+DataPart: 
+Size: 200.0
+Position: Node id2
+Destination: Node id2
+
+Visited nodes: [Node id4, Node id2]
+=================Destination reached!
+Data packet: 
+Source: Node id3
+Destination: Node id1
+Currently on: Node id1
+Size: 70.0
+
+Visited nodes: [Node id3, Node id2, Node id4, Node id5, Node id0, Node id1]
+=================Destination reached!
+DataPart: 
+Size: 70.0
+Position: Node id1
+Destination: Node id1
+
+Visited nodes: [Node id4, Node id2, Node id1]
+=================Destination reached!
+Data packet: 
+Source: Node id5
+Destination: Node id1
+Currently on: Node id1
+Size: 115.0
+
 Visited nodes: [Node id5, Node id4, Node id3, Node id2, Node id1]
 =================
