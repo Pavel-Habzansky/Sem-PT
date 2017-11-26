@@ -51,6 +51,11 @@ public class Node {
         this.smartStack = smartStack;
     }
 
+    /**
+     * Returns SmartStack on this Node
+     * @see SmartStack
+     * @return SmartStack on this Node
+     */
     public SmartStack getSmartStack() {
         return smartStack;
     }

@@ -75,6 +75,23 @@ public class Data implements IPacket {
     }
 
     /**
+     * Sets List of DataPart segments
+     * @see DataPart
+     * @param segments List of DataPart segments
+     */
+    public void setDataSegments(List<DataPart> segments) {
+        this.dataSegments = segments;
+    }
+
+    /**
+     * Returns parental packet of this IPacket. If IPacket is instance of Data, it returns itself
+     * @return Parental packet
+     */
+    public IPacket getParent() {
+        return this;
+    }
+
+    /**
      * Sets new time step for this Data packet
      * @param timestep New time step
      */
@@ -134,7 +151,7 @@ public class Data implements IPacket {
     /**
      * Sets new List as visited Nodes
      *
-     * @param newVisited
+     * @param newVisited New List of visited Nodes
      */
     @Override
     public void setVisited(List<Node> newVisited) {

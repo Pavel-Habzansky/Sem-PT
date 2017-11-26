@@ -37,7 +37,7 @@ public class SmartStack {
         double dataSum = 0;
         for (DataPart data : stackedData) {
             if (data == null) {
-                return 0;
+                continue;
             }
             dataSum += data.getSize();
         }
@@ -50,7 +50,7 @@ public class SmartStack {
      * @return Empty state
      */
     public boolean isEmpty() {
-        return (topElementIndex == 0);
+        return (topElementIndex == -1);
     }
 
 
@@ -70,8 +70,8 @@ public class SmartStack {
      * @return Top element stored in SmartStack
      */
     public DataPart pop() {
-        DataPart data = stackedData[topElementIndex];
-        topElementIndex--;
+        DataPart data = stackedData[topElementIndex--];
+//        topElementIndex--;
         return data;
     }
 
@@ -80,9 +80,12 @@ public class SmartStack {
      */
     public void fail() {
         System.out.println("SmartStack has failed due to stack overflow!");
-        for (int i = 0; i < stackedData.length; i++) {
-            stackedData[i].getParent().returnHome();
-            stackedData[i] = null;
+        for (DataPart data : stackedData) {
+            if (data == null) {
+                continue;
+            }
+            data.getParent().returnHome();
+            data = null;
         }
         topElementIndex = 0;
     }
@@ -94,23 +97,12 @@ public class SmartStack {
      */
     public void push(DataPart data) {
         if (isStackFull()) {
+            System.err.println(data);
             System.out.println("Stack is full. Increasing size... ");
             increaseSize();
             System.out.println("Size increased to: " + stackedData.length);
         }
-        if (getStackedData() > SIZE) {
-            System.out.println("Stack Overflow!");
-            for (int i = 0; i < stackedData.length; i++) {
-                DataPart dataPart = stackedData[i];
-                IPacket parent = dataPart.getParent();
-                parent.setSize(parent.getSize() + dataPart.getSize());
-                parent.setPosition(parent.getSource());
-                stackedData[i] = null;
-            }
-            return;
-        }
-        stackedData[topElementIndex] = data;
-        topElementIndex++;
+        stackedData[++topElementIndex] = data;
     }
 
     /**

@@ -134,5 +134,11 @@ public interface IPacket {
      */
     void returnHome();
 
+    /**
+     * Returns parental IPacket of current IPacket
+     * @return Parental IPacket
+     */
+    IPacket getParent();
+
 
 }
